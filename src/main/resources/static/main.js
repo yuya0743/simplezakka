@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // APIのベースURL
     const API_BASE = '/api';
+
+    // 検索関連要素の取得
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+
+    // 全商品を保持する配列
+    let allProducts = [];
     
     // 商品一覧の取得と表示
     fetchProducts();
@@ -30,6 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('confirm-order-btn').addEventListener('click', function() {
         submitOrder();
     });
+
+    // 検索入力フィールドのイベントリスナー（リアルタイム検索）
+    searchInput.addEventListener('input', function() {
+        filterProducts(searchInput.value);
+    });
+
+    // 検索ボタンのイベントリスナー（ボタンクリックで検索）
+    searchButton.addEventListener('click', function() {
+        filterProducts(searchInput.value);
+    });
     
     // 商品一覧を取得して表示する関数
     async function fetchProducts() {
@@ -39,18 +56,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('商品の取得に失敗しました');
             }
             const products = await response.json();
-            displayProducts(products);
+            console.log("取得した商品データ:", products); // ★この行を追加
+            allProducts = products;
+            displayProducts(allProducts); // 最初は全商品を画面に表示
         } catch (error) {
             console.error('Error:', error);
             alert('商品の読み込みに失敗しました');
         }
     }
+
+    // 検索クエリに基づいて商品をフィルタリングする関数
+    function filterProducts(query) {
+        const lowerCaseQuery = query.toLowerCase();
+        const filtered = allProducts.filter(product => 
+            product.name.toLowerCase().includes(lowerCaseQuery)
+        );
+        displayProducts(filtered); // フィルタリングされた商品を表示
+    }
     
-    // 商品一覧を表示する関数
+    // 商品一覧を表示する関数 (変更なし、引数にproductsを受け取る)
     function displayProducts(products) {
         const container = document.getElementById('products-container');
         container.innerHTML = '';
         
+        if (products.length === 0) {
+            container.innerHTML = '<p class="text-center w-100">該当する商品が見つかりません。</p>';
+            return;
+        }
+
         products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'col';
@@ -73,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 商品詳細を取得する関数
+    // 商品詳細を取得する関数 (変更なし)
     async function fetchProductDetail(productId) {
         try {
             const response = await fetch(`${API_BASE}/products/${productId}`);
@@ -88,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 商品詳細を表示する関数
+    // 商品詳細を表示する関数 (変更なし)
     function displayProductDetail(product) {
         document.getElementById('productModalTitle').textContent = product.name;
         
@@ -120,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         productModal.show();
     }
     
-    // カートに商品を追加する関数
+    // カートに商品を追加する関数 (変更なし)
     async function addToCart(productId, quantity) {
         try {
             const response = await fetch(`${API_BASE}/cart`, {
@@ -149,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート情報を取得する関数
+    // カート情報を取得する関数 (変更なし)
     async function updateCartDisplay() {
         try {
             const response = await fetch(`${API_BASE}/cart`);
@@ -163,12 +196,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カートバッジを更新する関数
+    // カートバッジを更新する関数 (変更なし)
     function updateCartBadge(count) {
         document.getElementById('cart-count').textContent = count;
     }
     
-    // カートモーダルの内容を更新する関数
+    // カートモーダルの内容を更新する関数 (変更なし)
     async function updateCartModalContent() {
         try {
             const response = await fetch(`${API_BASE}/cart`);
@@ -183,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート内容を表示する関数
+    // カート内容を表示する関数 (変更なし)
     function displayCart(cart) {
         const modalBody = document.getElementById('cartModalBody');
         
@@ -255,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート内の商品数量を更新する関数
+    // カート内の商品数量を更新する関数 (変更なし)
     async function updateItemQuantity(itemId, quantity) {
         try {
             const response = await fetch(`${API_BASE}/cart/items/${itemId}`, {
@@ -282,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート内の商品を削除する関数
+    // カート内の商品を削除する関数 (変更なし)
     async function removeItem(itemId) {
         try {
             const response = await fetch(`${API_BASE}/cart/items/${itemId}`, {
@@ -302,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 注文を確定する関数
+    // 注文を確定する関数 (変更なし)
     async function submitOrder() {
         const form = document.getElementById('order-form');
         
@@ -352,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 注文完了画面を表示する関数
+    // 注文完了画面を表示する関数 (変更なし)
     function displayOrderComplete(order) {
         document.getElementById('orderCompleteBody').innerHTML = `
             <p>ご注文ありがとうございます。注文番号は <strong>${order.orderId}</strong> です。</p>
