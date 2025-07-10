@@ -37,9 +37,7 @@ public class ProductService {
                 product.getProductId(),
                 product.getName(),
                 product.getPrice(),
-                product.getImageUrl(),
-                product.getCategory(),
-                product.getMaterial()
+                product.getImageUrl()
         );
     }
     
@@ -50,9 +48,7 @@ public class ProductService {
                 product.getPrice(),
                 product.getDescription(),
                 product.getStock(),
-                product.getImageUrl(),
-                product.getCategory(),
-                product.getMaterial()
-       );
+                product.getImageUrl()
+        );
     }
 }
