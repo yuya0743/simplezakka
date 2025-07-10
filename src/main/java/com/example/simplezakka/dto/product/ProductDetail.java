@@ -14,4 +14,5 @@ public class ProductDetail {
     private String description;
     private Integer stock;
     private String imageUrl;
+    private String category; 
 }
