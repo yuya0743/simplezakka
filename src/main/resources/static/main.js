@@ -394,3 +394,47 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 });
+// 商品データ例（カテゴリ情報付き）
+const products = [
+    { name: "シンプルデスクオーガナイザー", category: "デスク周り" },
+    { name: "アロマディフューザー（ウッド）", category: "インテリア・雑貨" },
+    { name: "ミニマルウォールクロック", category: "インテリア・雑貨" },
+    { name: "陶器フラワーベース", category: "インテリア・雑貨" },
+    { name: "木製コースター（四枚セット）", category: "インテリア・雑貨" },
+    { name: "コットンブランケット", category: "家具・寝具" },
+    { name: "リネンクッションカバー", category: "家具・寝具" },
+    { name: "ガラス保存容器セット", category: "キッチン用品" },
+    { name: "ステンレスタンブラー", category: "キッチン用品" },
+    { name: "キャンバストートバッグ", category: "バッグ・トラベル" }
+];
+
+// 検索・カテゴリでフィルター
+function renderProducts() {
+    const keyword = document.getElementById("search-input").value.trim();
+    const selectedCategory = document.getElementById("category-select").value;
+    const container = document.getElementById("products-container");
+
+    // 一旦クリア
+    container.innerHTML = "";
+
+    const filtered = products.filter(p => {
+        const matchKeyword = keyword === "" || p.name.includes(keyword);
+        const matchCategory = selectedCategory === "" || p.category === selectedCategory;
+        return matchKeyword && matchCategory;
+    });
+
+    // 該当商品を表示（簡易的な例）
+    for (const p of filtered) {
+        const div = document.createElement("div");
+        div.className = "col";
+        div.innerHTML = `<div class="card p-3"><h5>${p.name}</h5><p>${p.category}</p></div>`;
+        container.appendChild(div);
+    }
+}
+
+// 検索ボタン、カテゴリ変更時に実行
+document.getElementById("search-button").addEventListener("click", renderProducts);
+document.getElementById("category-select").addEventListener("change", renderProducts);
+
+// 初期表示
+renderProducts();
