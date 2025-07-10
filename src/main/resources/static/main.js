@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // APIのベースURL
     const API_BASE = '/api';
+
+    // 検索関連要素の取得
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+
+    // 全商品を保持する配列
+    let allProducts = [];
     
     // 商品一覧の取得と表示
     fetchProducts();
@@ -30,6 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('confirm-order-btn').addEventListener('click', function() {
         submitOrder();
     });
+
+    // 検索入力フィールドのイベントリスナー（リアルタイム検索）
+    searchInput.addEventListener('input', function() {
+        filterProducts(searchInput.value);
+    });
+
+    // 検索ボタンのイベントリスナー（ボタンクリックで検索）
+    searchButton.addEventListener('click', function() {
+        filterProducts(searchInput.value);
+    });
     
     // 商品一覧を取得して表示する関数
     async function fetchProducts() {
@@ -39,18 +56,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('商品の取得に失敗しました');
             }
             const products = await response.json();
-            displayProducts(products);
+            console.log("取得した商品データ:", products); // ★この行を追加
+            allProducts = products;
+            displayProducts(allProducts); // 最初は全商品を画面に表示
         } catch (error) {
             console.error('Error:', error);
             alert('商品の読み込みに失敗しました');
         }
     }
+
+    // カテゴリプルダウンの変更イベントでリアルタイム更新
+    document.getElementById('category-select').addEventListener('change', filterProducts);
+
+    // 検索クエリに基づいて商品をフィルタリングする関数
+    function filterProducts() {
+    const keyword = searchInput.value.trim().toLowerCase();
+    const selectedCategory = document.getElementById("category-select").value;
+
+    const filtered = allProducts.filter(product => {
+        const matchName = product.name.toLowerCase().includes(keyword);
+        const matchCategory = selectedCategory === "" || product.category === selectedCategory;
+        return matchName && matchCategory;
+    });
+
+    displayProducts(filtered);
+}
+
     
-    // 商品一覧を表示する関数
+    // 商品一覧を表示する関数 (変更なし、引数にproductsを受け取る)
     function displayProducts(products) {
         const container = document.getElementById('products-container');
         container.innerHTML = '';
         
+        if (products.length === 0) {
+            container.innerHTML = '<p class="text-center w-100">該当する商品が見つかりません。</p>';
+            return;
+        }
+
         products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'col';
@@ -73,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 商品詳細を取得する関数
+    // 商品詳細を取得する関数 (変更なし)
     async function fetchProductDetail(productId) {
         try {
             const response = await fetch(`${API_BASE}/products/${productId}`);
@@ -88,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 商品詳細を表示する関数
+    // 商品詳細を表示する関数 (変更なし)
     function displayProductDetail(product) {
         document.getElementById('productModalTitle').textContent = product.name;
         
@@ -102,6 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="fs-4">¥${product.price.toLocaleString()}</p>
                     <p>${product.description}</p>
                     <p>在庫: ${product.stock} 個</p>
+                    <p>カテゴリ: ${product.category}</p>
+                    <p>素材: ${product.material}</p>
                     <div class="d-flex align-items-center mb-3">
                         <label for="quantity" class="me-2">数量:</label>
                         <input type="number" id="quantity" class="form-control w-25" value="1" min="1" max="${product.stock}">
@@ -120,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         productModal.show();
     }
     
-    // カートに商品を追加する関数
+    // カートに商品を追加する関数 (変更なし)
     async function addToCart(productId, quantity) {
         try {
             const response = await fetch(`${API_BASE}/cart`, {
@@ -149,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート情報を取得する関数
+    // カート情報を取得する関数 (変更なし)
     async function updateCartDisplay() {
         try {
             const response = await fetch(`${API_BASE}/cart`);
@@ -163,12 +207,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カートバッジを更新する関数
+    // カートバッジを更新する関数 (変更なし)
     function updateCartBadge(count) {
         document.getElementById('cart-count').textContent = count;
     }
     
-    // カートモーダルの内容を更新する関数
+    // カートモーダルの内容を更新する関数 (変更なし)
     async function updateCartModalContent() {
         try {
             const response = await fetch(`${API_BASE}/cart`);
@@ -183,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート内容を表示する関数
+    // カート内容を表示する関数 (変更なし)
     function displayCart(cart) {
         const modalBody = document.getElementById('cartModalBody');
         
@@ -255,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート内の商品数量を更新する関数
+    // カート内の商品数量を更新する関数 (変更なし)
     async function updateItemQuantity(itemId, quantity) {
         try {
             const response = await fetch(`${API_BASE}/cart/items/${itemId}`, {
@@ -282,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // カート内の商品を削除する関数
+    // カート内の商品を削除する関数 (変更なし)
     async function removeItem(itemId) {
         try {
             const response = await fetch(`${API_BASE}/cart/items/${itemId}`, {
@@ -302,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 注文を確定する関数
+    // 注文を確定する関数 (変更なし)
     async function submitOrder() {
         const form = document.getElementById('order-form');
         
@@ -352,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 注文完了画面を表示する関数
+    // 注文完了画面を表示する関数 (変更なし)
     function displayOrderComplete(order) {
         document.getElementById('orderCompleteBody').innerHTML = `
             <p>ご注文ありがとうございます。注文番号は <strong>${order.orderId}</strong> です。</p>
@@ -361,3 +405,48 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 });
+// 商品データ例（カテゴリ情報付き）
+const products = [
+    { name: "シンプルデスクオーガナイザー", category: "デスク周り" },
+    { name: "アロマディフューザー（ウッド）", category: "インテリア・雑貨" },
+    { name: "ミニマルウォールクロック", category: "インテリア・雑貨" },
+    { name: "陶器フラワーベース", category: "インテリア・雑貨" },
+    { name: "木製コースター（四枚セット）", category: "インテリア・雑貨" },
+    { name: "コットンブランケット", category: "家具・寝具" },
+    { name: "リネンクッションカバー", category: "家具・寝具" },
+    { name: "ガラス保存容器セット", category: "キッチン用品" },
+    { name: "ステンレスタンブラー", category: "キッチン用品" },
+    { name: "キャンバストートバッグ", category: "バッグ・トラベル" }
+];
+
+// 検索・カテゴリでフィルター
+function renderProducts() {
+    const keyword = document.getElementById("search-input").value.trim();
+    const selectedCategory = document.getElementById("category-select").value;
+    const container = document.getElementById("products-container");
+
+    // 一旦クリア
+    container.innerHTML = "";
+
+    const filtered = products.filter(p => {
+        const matchKeyword = keyword === "" || p.name.includes(keyword);
+        const matchCategory = selectedCategory === "" || p.category === selectedCategory;
+        return matchKeyword && matchCategory;
+    });
+
+    // 該当商品を表示（簡易的な例）
+    for (const p of filtered) {
+        const div = document.createElement("div");
+        div.className = "col";
+        div.innerHTML = `<div class="card p-3"><h5>${p.name}</h5><p>${p.category}</p></div>`;
+        container.appendChild(div);
+    }
+}
+
+// 検索ボタン、カテゴリ変更時に実行
+document.getElementById("search-button").addEventListener("click", filterProducts);
+document.getElementById("category-select").addEventListener("click", filterProducts);
+
+// 初期表示
+filterProducts();
+

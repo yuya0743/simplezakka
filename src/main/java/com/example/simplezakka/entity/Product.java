@@ -28,9 +28,17 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
     
+    @Column(nullable = false)
+
+
+
     private String imageUrl;
     
     private Boolean isRecommended;
+
+    private String category;
+
+    private String material;
     
     private LocalDateTime createdAt;
     
@@ -41,6 +49,7 @@ public class Product {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
+    
     
     @PreUpdate
     protected void onUpdate() {
