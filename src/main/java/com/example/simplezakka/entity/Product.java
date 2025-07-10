@@ -55,20 +55,5 @@ public class Product {
     }
 
 
-    public ProductDetail getCategory() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCategory'");
-    }
-
-
-    public void setCategory(String category) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setCategory'");
-    }
-
-
-    public void setMaterial(String material) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setMaterial'");
-    }
+  
 }

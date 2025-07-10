@@ -38,7 +38,7 @@ public class ProductService {
                 product.getName(),
                 product.getPrice(),
                 product.getImageUrl(),
-                product.getCategory()// Assuming Product has a Category entity with a getName() method   
+                product.getCategory(),// Assuming Product has a Category entity with a getName() method   
                 product.getMaterial() // Assuming Product has a material field
         );
     }
@@ -51,7 +51,7 @@ public class ProductService {
                 product.getDescription(),
                 product.getStock(),
                 product.getImageUrl(),
-                product.getCategory() != null ? product.getCategory().getName() : null, // Assuming Product has a Category entity with a getName() method
+                product.getCategory(), // Assuming Product has a Category entity with a getName() method
                 product.getMaterial() // Assuming Product has a material field
         );
     }
