@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="fs-4">¥${product.price.toLocaleString()}</p>
                     <p>${product.description}</p>
                     <p>在庫: ${product.stock} 個</p>
+                    <p>カテゴリ: ${product.category}</p>
                     <div class="d-flex align-items-center mb-3">
                         <label for="quantity" class="me-2">数量:</label>
                         <input type="number" id="quantity" class="form-control w-25" value="1" min="1" max="${product.stock}">

@@ -37,7 +37,9 @@ public class ProductService {
                 product.getProductId(),
                 product.getName(),
                 product.getPrice(),
-                product.getImageUrl()
+                product.getImageUrl(),
+                product.getCategory()// Assuming Product has a Category entity with a getName() method   
+                product.getMaterial() // Assuming Product has a material field
         );
     }
     
