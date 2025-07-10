@@ -33,6 +33,10 @@ public class Product {
     private String imageUrl;
     
     private Boolean isRecommended;
+
+    private String category; // Assuming a default category field
+    
+    private String material; // Assuming a material field
     
     private LocalDateTime createdAt;
     
