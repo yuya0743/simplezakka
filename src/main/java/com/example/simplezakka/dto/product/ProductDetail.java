@@ -14,4 +14,6 @@ public class ProductDetail {
     private String description;
     private Integer stock;
     private String imageUrl;
+    private String category; // Assuming Product has a Category entity with a getName() method
+    private String material; // Assuming Product has a material field
 }
