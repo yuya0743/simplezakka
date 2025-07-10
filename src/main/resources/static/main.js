@@ -65,14 +65,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // カテゴリプルダウンの変更イベントでリアルタイム更新
+    document.getElementById('category-select').addEventListener('change', filterProducts);
+
     // 検索クエリに基づいて商品をフィルタリングする関数
-    function filterProducts(query) {
-        const lowerCaseQuery = query.toLowerCase();
-        const filtered = allProducts.filter(product => 
-            product.name.toLowerCase().includes(lowerCaseQuery)
-        );
-        displayProducts(filtered); // フィルタリングされた商品を表示
-    }
+    function filterProducts() {
+    const keyword = searchInput.value.trim().toLowerCase();
+    const selectedCategory = document.getElementById("category-select").value;
+
+    const filtered = allProducts.filter(product => {
+        const matchName = product.name.toLowerCase().includes(keyword);
+        const matchCategory = selectedCategory === "" || product.category === selectedCategory;
+        return matchName && matchCategory;
+    });
+
+    displayProducts(filtered);
+}
+
     
     // 商品一覧を表示する関数 (変更なし、引数にproductsを受け取る)
     function displayProducts(products) {
@@ -423,28 +432,19 @@ function renderProducts() {
         return matchKeyword && matchCategory;
     });
 
-for (const p of filtered) {
-  const div = document.createElement("div");
-  div.className = "col";
-
-  div.innerHTML = `
-    <div class="card p-3">
-      <img src="${p.image}" alt="${p.name}" class="card-img-top" style="max-height: 200px; object-fit: cover;">
-      <div class="card-body">
-        <h5 class="card-title">${p.name}</h5>
-        <p class="card-text">${p.category}</p>
-        <a href="${p.detailsUrl}" class="btn btn-primary">商品詳細</a>
-      </div>
-    </div>
-  `;
-
-  container.appendChild(div);
-}
+    // 該当商品を表示（簡易的な例）
+    for (const p of filtered) {
+        const div = document.createElement("div");
+        div.className = "col";
+        div.innerHTML = `<div class="card p-3"><h5>${p.name}</h5><p>${p.category}</p></div>`;
+        container.appendChild(div);
+    }
 }
 
 // 検索ボタン、カテゴリ変更時に実行
-document.getElementById("search-button").addEventListener("click", renderProducts);
-document.getElementById("category-select").addEventListener("change", renderProducts);
+document.getElementById("search-button").addEventListener("click", filterProducts);
+document.getElementById("category-select").addEventListener("click", filterProducts);
 
 // 初期表示
-renderProducts();
+filterProducts();
+
