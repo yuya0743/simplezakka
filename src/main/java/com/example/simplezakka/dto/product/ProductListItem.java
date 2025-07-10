@@ -13,4 +13,5 @@ public class ProductListItem {
     private Integer price;
     private String imageUrl;
     private String category; 
+    private String material;
 }

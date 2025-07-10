@@ -15,4 +15,5 @@ public class ProductDetail {
     private Integer stock;
     private String imageUrl;
     private String category; 
+    private String material;
 }

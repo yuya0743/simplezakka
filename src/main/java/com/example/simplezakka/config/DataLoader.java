@@ -37,8 +37,13 @@ public class DataLoader implements CommandLineRunner {
                 3500, 
                 20, 
                 "/images/desk-organizer.png", 
-                "デスク周り", 
-                true
+                true,
+                "インテリア",
+                "木製"
+                
+                
+
+                
             ),
             createProduct(
                 "アロマディフューザー（ウッド）", 
@@ -46,8 +51,9 @@ public class DataLoader implements CommandLineRunner {
                 4200, 
                 15, 
                 "/images/aroma-diffuser.png", 
-                "インテリア・雑貨",
-                true
+                true,
+                "インテリア",
+                "木製"
             ),
             createProduct(
                 "コットンブランケット", 
@@ -55,8 +61,10 @@ public class DataLoader implements CommandLineRunner {
                 5800, 
                 10, 
                 "/images/cotton-blanket.png", 
-                "家具・寝具", 
-                false
+                false,
+                "インテリア",
+                "コットン"
+
             ),
             createProduct(
                 "ステンレスタンブラー", 
@@ -64,8 +72,9 @@ public class DataLoader implements CommandLineRunner {
                 2800, 
                 30, 
                 "/images/tumbler.png", 
-                "キッチン用品", 
-                false
+                false,
+                "インテリア",
+                "ステンレス"
             ),
             createProduct(
                 "ミニマルウォールクロック", 
@@ -73,8 +82,9 @@ public class DataLoader implements CommandLineRunner {
                 3200, 
                 25, 
                 "/images/wall-clock.png", 
-                "インテリア・雑貨", 
-                false
+                false,
+                "インテリア",
+                "木製"
             ),
             createProduct(
                 "リネンクッションカバー", 
@@ -82,8 +92,9 @@ public class DataLoader implements CommandLineRunner {
                 2500, 
                 40, 
                 "/images/cushion-cover.png", 
-                "家具・寝具", 
-                true
+                true,
+                "インテリア",
+                "リネン"
             ),
             createProduct(
                 "陶器フラワーベース", 
@@ -91,8 +102,9 @@ public class DataLoader implements CommandLineRunner {
                 4000, 
                 15, 
                 "/images/flower-vase.png", 
-                "インテリア・雑貨", 
-                false
+                false,
+                "インテリア",
+                "陶器"
             ),
             createProduct(
                 "木製コースター（4枚セット）", 
@@ -100,8 +112,9 @@ public class DataLoader implements CommandLineRunner {
                 1800, 
                 50, 
                 "/images/wooden-coaster.png", 
-                "キッチン用品", 
-                false
+                false,
+                "インテリア",
+                "木製"
             ),
             createProduct(
                 "キャンバストートバッグ", 
@@ -109,8 +122,9 @@ public class DataLoader implements CommandLineRunner {
                 3600, 
                 35, 
                 "/images/tote-bag.png", 
-                "バッグ・トラベル",
-                true
+                true,
+                "ファッション",
+                "キャンバス"
             ),
             createProduct(
                 "ガラス保存容器セット", 
@@ -118,23 +132,26 @@ public class DataLoader implements CommandLineRunner {
                 4500, 
                 20, 
                 "/images/glass-container.png", 
-                "キッチン用品", 
-                false
+                false,
+                "キッチン",
+                "ガラス"
             )
         );
         
+
         productRepository.saveAll(products);
     }
     
-    private Product createProduct(String name, String description, Integer price, Integer stock, String imageUrl, String category, Boolean isRecommended) {
+    private Product createProduct(String name, String description, Integer price, Integer stock, String imageUrl, Boolean isRecommended,String category, String material) {
         Product product = new Product();
         product.setName(name);
         product.setDescription(description);
         product.setPrice(price);
         product.setStock(stock);
         product.setImageUrl(imageUrl);
-        product.setCategory(category);
         product.setIsRecommended(isRecommended);
+        product.setCategory(category); // Assuming a default category
+        product.setMaterial(material); // Assuming a default material
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
         return product;

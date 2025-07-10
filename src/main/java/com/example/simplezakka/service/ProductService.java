@@ -38,7 +38,8 @@ public class ProductService {
                 product.getName(),
                 product.getPrice(),
                 product.getImageUrl(),
-                product.getCategory()
+                product.getCategory(),
+                product.getMaterial()
         );
     }
     
@@ -50,7 +51,8 @@ public class ProductService {
                 product.getDescription(),
                 product.getStock(),
                 product.getImageUrl(),
-                product.getCategory()
-        );
+                product.getCategory(),
+                product.getMaterial()
+       );
     }
 }

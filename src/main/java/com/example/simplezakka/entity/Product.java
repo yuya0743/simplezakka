@@ -29,11 +29,16 @@ public class Product {
     private Integer stock;
     
     @Column(nullable = false)
-    private String category;
+
+
 
     private String imageUrl;
     
     private Boolean isRecommended;
+
+    private String category;
+
+    private String material;
     
     private LocalDateTime createdAt;
     
