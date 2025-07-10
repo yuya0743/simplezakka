@@ -396,16 +396,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 // 商品データ例（カテゴリ情報付き）
 const products = [
-    { name: "シンプルデスクオーガナイザー", category: "デスク周り" },
-    { name: "アロマディフューザー（ウッド）", category: "インテリア・雑貨" },
-    { name: "ミニマルウォールクロック", category: "インテリア・雑貨" },
-    { name: "陶器フラワーベース", category: "インテリア・雑貨" },
-    { name: "木製コースター（四枚セット）", category: "インテリア・雑貨" },
-    { name: "コットンブランケット", category: "家具・寝具" },
-    { name: "リネンクッションカバー", category: "家具・寝具" },
-    { name: "ガラス保存容器セット", category: "キッチン用品" },
-    { name: "ステンレスタンブラー", category: "キッチン用品" },
-    { name: "キャンバストートバッグ", category: "バッグ・トラベル" }
+    { name: "シンプルデスクオーガナイザー", category: "デスク周り", imageUrl: "desk-organizer.png" },
+    { name: "アロマディフューザー（ウッド）", category: "インテリア・雑貨", imageUrl: "aroma-diffuser.png" },
+    { name: "ミニマルウォールクロック", category: "インテリア・雑貨" ,imageUrl: "wall-clock.png" },
+    { name: "陶器フラワーベース", category: "インテリア・雑貨" ,imageUrl: "flower-vase.png" },
+    { name: "木製コースター（四枚セット）", category: "インテリア・雑貨" ,imageUrl: "wooden-coaste.png" },
+    { name: "コットンブランケット", category: "家具・寝具" , imageUrl: "cotton-blanket.png" },
+    { name: "リネンクッションカバー", category: "家具・寝具" , imageUrl: "cushion-cover.png" },
+    { name: "ガラス保存容器セット", category: "キッチン用品" , imageUrl: "glass-container.png" },
+    { name: "ステンレスタンブラー", category: "キッチン用品" , imageUrl: "tumbler.png" },
+    { name: "キャンバストートバッグ", category: "バッグ・トラベル" , imageUrl: "tote-bag.png" }
 ];
 
 // 検索・カテゴリでフィルター
@@ -423,7 +423,7 @@ function renderProducts() {
         return matchKeyword && matchCategory;
     });
 
-    // 該当商品を表示（簡易的な例）
+    // 該当商品を表示
     for (const p of filtered) {
         const div = document.createElement("div");
         div.className = "col";
