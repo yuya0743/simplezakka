@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>シンプル雑貨オンライン</title>
+    <title>シンプル雑貨</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
@@ -12,14 +12,26 @@
     <div class="container">
         <header class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <span class="fs-4">シンプル雑貨オンライン</span>
+                <span class="fs-4">シンプル雑貨</span>
             </a>
 
             <div class="d-flex align-items-center mb-3 mb-md-0 me-3">
                 <input type="text" id="search-input" class="form-control me-2" placeholder="商品名で検索...">
                 <button id="search-button" class="btn btn-outline-secondary">検索</button>
             </div>
-
+            
+            <div class="d-flex align-items-center mb-3 mb-md-0 me-3">
+                <select id="category-select" class="form-select me-2">
+                    <option value="">すべてのカテゴリ</option>
+                    <option value="デスク周り">デスク周り</option>
+                    <option value="インテリア・雑貨">インテリア・雑貨</option>
+                    <option value="家具・寝具">家具・寝具</option>
+                    <option value="キッチン用品">キッチン用品</option>
+                    <option value="バッグ・トラベル">バッグ・トラベル</option>
+                </select>
+                <input type="text" id="search-input" class="form-control me-2" placeholder="商品名で検索...">
+                <button id="search-button" class="btn btn-outline-secondary">検索</button>
+            </div>
             <div class="text-end">
                 <button id="cart-btn" class="btn btn-outline-dark position-relative">
                     <i class="bi bi-cart"></i> カート
@@ -31,14 +43,11 @@
         </header>
 
         <div id="main-content">
-            <!-- ここにコンテンツが動的に表示される -->
             <div id="products-container" class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-                <!-- 商品リストがここに表示される -->
-            </div>
+                </div>
         </div>
     </div>
 
-    <!-- 商品詳細モーダル -->
     <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -47,13 +56,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="productModalBody">
-                    <!-- 商品詳細情報 -->
-                </div>
+                    </div>
             </div>
         </div>
     </div>
 
-    <!-- カートモーダル -->
     <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -62,8 +69,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="cartModalBody">
-                    <!-- カート内容 -->
-                </div>
+                    </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">買い物を続ける</button>
                     <button type="button" class="btn btn-primary" id="checkout-btn">注文手続きへ</button>
@@ -72,7 +78,6 @@
         </div>
     </div>
 
-    <!-- 注文フォームモーダル -->
     <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -112,7 +117,6 @@
         </div>
     </div>
 
-    <!-- 注文完了モーダル -->
     <div class="modal fade" id="orderCompleteModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -121,8 +125,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="orderCompleteBody">
-                    <!-- 注文完了メッセージ -->
-                </div>
+                    </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">トップに戻る</button>
                 </div>
