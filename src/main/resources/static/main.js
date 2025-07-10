@@ -396,16 +396,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 // 商品データ例（カテゴリ情報付き）
 const products = [
-    { name: "シンプルデスクオーガナイザー", category: "デスク周り", imageUrl: "desk-organizer.png" },
-    { name: "アロマディフューザー（ウッド）", category: "インテリア・雑貨", imageUrl: "aroma-diffuser.png" },
-    { name: "ミニマルウォールクロック", category: "インテリア・雑貨" ,imageUrl: "wall-clock.png" },
-    { name: "陶器フラワーベース", category: "インテリア・雑貨" ,imageUrl: "flower-vase.png" },
-    { name: "木製コースター（四枚セット）", category: "インテリア・雑貨" ,imageUrl: "wooden-coaste.png" },
-    { name: "コットンブランケット", category: "家具・寝具" , imageUrl: "cotton-blanket.png" },
-    { name: "リネンクッションカバー", category: "家具・寝具" , imageUrl: "cushion-cover.png" },
-    { name: "ガラス保存容器セット", category: "キッチン用品" , imageUrl: "glass-container.png" },
-    { name: "ステンレスタンブラー", category: "キッチン用品" , imageUrl: "tumbler.png" },
-    { name: "キャンバストートバッグ", category: "バッグ・トラベル" , imageUrl: "tote-bag.png" }
+    { name: "シンプルデスクオーガナイザー", category: "デスク周り" },
+    { name: "アロマディフューザー（ウッド）", category: "インテリア・雑貨" },
+    { name: "ミニマルウォールクロック", category: "インテリア・雑貨" },
+    { name: "陶器フラワーベース", category: "インテリア・雑貨" },
+    { name: "木製コースター（四枚セット）", category: "インテリア・雑貨" },
+    { name: "コットンブランケット", category: "家具・寝具" },
+    { name: "リネンクッションカバー", category: "家具・寝具" },
+    { name: "ガラス保存容器セット", category: "キッチン用品" },
+    { name: "ステンレスタンブラー", category: "キッチン用品" },
+    { name: "キャンバストートバッグ", category: "バッグ・トラベル" }
 ];
 
 // 検索・カテゴリでフィルター
@@ -423,13 +423,23 @@ function renderProducts() {
         return matchKeyword && matchCategory;
     });
 
-    // 該当商品を表示
-    for (const p of filtered) {
-        const div = document.createElement("div");
-        div.className = "col";
-        div.innerHTML = `<div class="card p-3"><h5>${p.name}</h5><p>${p.category}</p></div>`;
-        container.appendChild(div);
-    }
+for (const p of filtered) {
+  const div = document.createElement("div");
+  div.className = "col";
+
+  div.innerHTML = `
+    <div class="card p-3">
+      <img src="${p.image}" alt="${p.name}" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+      <div class="card-body">
+        <h5 class="card-title">${p.name}</h5>
+        <p class="card-text">${p.category}</p>
+        <a href="${p.detailsUrl}" class="btn btn-primary">商品詳細</a>
+      </div>
+    </div>
+  `;
+
+  container.appendChild(div);
+}
 }
 
 // 検索ボタン、カテゴリ変更時に実行
