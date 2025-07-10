@@ -13,8 +13,3 @@
     top: -8px;
     right: 5px;
 }
-
-/* 検索フォームの調整（任意） */
-#search-input {
-    min-width: 200px; /* 必要に応じて幅を調整 */
-}
