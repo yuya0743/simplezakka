@@ -10,20 +10,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-public class RoginController {
+public class loginController {
 
-    private final RoginService roginService;
+    private final loginService loginService;
     
     @Autowired
-    public roginController(RoginService RoginService) {
-        this.RoginService = RoginService;
+    public loginController(loginService loginService) {
+        this.loginService = loginService;
     }
     
    
     
     @GetMapping("/{users}")
     public ResponseEntity<users> getUsersById(@PathVariable String email) {
-        LoginDetail email = RoginService.findUserstByemail(email);
+        LoginDetail email = loginService.findUserstByemail(email);
         if (UserId == null) {
             throw new Error('ログインに失敗しました');
         }
