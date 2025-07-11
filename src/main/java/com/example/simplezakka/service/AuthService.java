@@ -1,8 +1,5 @@
 package com.example.simplezakka.service;
 
-import com.example.simplezakka.dto.user.Loginrequest;
-import com.example.simplezakka.dto.user.RegisterRequest;
-import com.example.simplezakka.dto.user.AuthResponse;
 import com.example.simplezakka.entity.User;
 import com.example.simplezakka.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
