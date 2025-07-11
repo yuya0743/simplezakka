@@ -1,4 +1,6 @@
-import com.example.simplezakka.service.ProductService;
+import com.example.simplezakka.dto.Login.LoginInfo;
+import com.example.simplezakka.service.AuthService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,23 +12,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-public class LoginController {
+public class LogInController {
 
-    private final LoginService loginService;
+    private final AuthService loginService;
     
-    @Autowired
-    public loginController(LoginService loginService) {
+    
+    public LogInController(AuthService loginService) {
         this.loginService = loginService;
     }
     
    
     
     @GetMapping("/{users}")
-    public ResponseEntity<users> getUsersById(@PathVariable String email) {
-        LoginDetail email = loginService.findUserstByemail(email);
-        if (UserId == null) {
-            throw new Error('ログインに失敗しました');
+    public ResponseEntity<LoginInfo> getUsersById(@PathVariable String email) {
+        LoginInfo user = UserRepository.findById(email);
+        if (email == null) {
+            throw new Error("User not found with email: " + email);
         }
-        return ResponseEntity.ok(UserId);
+        return ResponseEntity.ok(user.getEmail());
     }
 }

@@ -11,12 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class DataLoader implements CommandLineRunner {
-
+public class Logindata implements CommandLineRunner {@Autowired
     private final UserRepository userRepository;
 
-    @Autowired
-    public DataLoader(UserRepository userRepository) {
+    public Logindata(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -26,10 +24,6 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadSampleProducts() {
-        if (productRepository.count() > 0) {
-            return; // すでにデータが存在する場合はスキップ
-        }
-
         List<User> Users = Arrays.asList(
             createuser(
                 "森旺介", 
@@ -70,20 +64,20 @@ public class DataLoader implements CommandLineRunner {
                 "hinako.kimura@avantcorp.com",
                 "京都府京都市左京区16-17-18",
                 "mypassword789"
-            ),
+            )
             
             
         );
         
 
-        userRepository.saveAll(user);
+        userRepository.saveAll(Users);
     }
     
-    private User createuser(String name, String email, String adress, String password) {
-        User user = new user();
-        user.setName(name);
+    private User createuser(String username, String email, String address, String password) {
+        User user = new User();
+        user.setUsername(username);
         user.setEmail(email);
-        user.setAdress(adress);
+        user.setAddress(address);
         user.setPassword(password);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());

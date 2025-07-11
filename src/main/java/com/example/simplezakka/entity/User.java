@@ -12,7 +12,9 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
+
     private String email; 
+
     
     @Column(nullable = false)
     private String name;
@@ -36,5 +38,10 @@ public class User {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
+    }
+
+    public void setAdress(String adress) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAdress'");
     }
 }
