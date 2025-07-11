@@ -1,3 +1,5 @@
+package com.example.simplezakka.controller;
+
 import com.example.simplezakka.dto.Login.UserInfo;
 import com.example.simplezakka.entity.User;
 import com.example.simplezakka.repository.UserRepository;
