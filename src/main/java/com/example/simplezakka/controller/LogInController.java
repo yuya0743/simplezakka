@@ -10,12 +10,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-public class LoginController {
+public class LogInController {
 
-    private final LoginService loginService;
+    private final AuthService loginService;
     
     @Autowired
-    public loginController(LoginService loginService) {
+    public loginController(AuthService loginService) {
         this.loginService = loginService;
     }
     
