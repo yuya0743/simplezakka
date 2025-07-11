@@ -73,9 +73,9 @@ public class Logindata implements CommandLineRunner {@Autowired
         userRepository.saveAll(Users);
     }
     
-    private User createuser(String username, String email, String address, String password) {
+    private User createuser(String name, String email, String address, String password) {
         User user = new User();
-        user.setUsername(username);
+        user.setName(name);
         user.setEmail(email);
         user.setAddress(address);
         user.setPassword(password);
