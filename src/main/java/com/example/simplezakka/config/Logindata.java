@@ -11,11 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class Logindata implements CommandLineRunner {
+public class Logindata implements CommandLineRunner {@Autowired
     private final UserRepository userRepository;
 
-    @Autowired
-    public DataLoader(UserRepository userRepository) {
+    public Logindata(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -25,10 +24,6 @@ public class Logindata implements CommandLineRunner {
     }
 
     private void loadSampleProducts() {
-        if (UserRepository.count() > 0) {
-            return; // すでにデータが存在する場合はスキップ
-        }
-
         List<User> Users = Arrays.asList(
             createuser(
                 "森旺介", 
@@ -75,11 +70,11 @@ public class Logindata implements CommandLineRunner {
         );
         
 
-        userRepository.saveAll(user);
+        userRepository.saveAll(Users);
     }
     
     private User createuser(String username, String email, String address, String password) {
-        User user = new user();
+        User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setAddress(address);
