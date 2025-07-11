@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
 
     private final ProductService productService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+
     
     @Autowired
     public ProductController(ProductService productService) {
@@ -26,6 +32,7 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductListItem>> getAllProducts() {
         List<ProductListItem> products = productService.findAllProducts();
+        logger.info("getAllProducts is called。inputcode: {}", products);
         return ResponseEntity.ok(products);
     }
     
