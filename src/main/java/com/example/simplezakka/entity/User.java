@@ -16,13 +16,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer email;
     
     @Column(nullable = false)
     private String username;
-    
-    @Column(nullable = false)
-    private String Email;
     
     @Column(nullable = false)
     private String password;
