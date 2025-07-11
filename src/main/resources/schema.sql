@@ -1,3 +1,4 @@
+
 -- src/main/resources/schema.sql
 
 -- usersテーブルの定義
@@ -21,3 +22,4 @@ CREATE TABLE IF NOT EXISTS products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
