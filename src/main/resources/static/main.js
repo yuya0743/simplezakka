@@ -27,13 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cartModal.show();
     });
 
-    // 会員登録クリックイベント
-    document.getElementById('register-btn').addEventListener('click', function() {
-        console.log("ボタンを押しました");
-        window.location.href = 'kaiin-toroku.html'
-    });
-
-    // ログインクリックイベント
+    // ログイン/会員登録クリックイベント
     document.getElementById('login-btn').addEventListener('click', function() {
         console.log("ボタンを押しました");
         window.location.href = 'login.html'

@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <a href="ichiran.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <span class="fs-4">シンプル雑貨オンライン</span>
             </a>
 
@@ -21,7 +21,7 @@
             </div>
 
             <div class="d-flex align-items-center mb-3 mb-md-0 me-3">
-                <button id="search-button" class="btn btn-outline-secondary">会員登録</button>
+                <button id="login-btn" class="btn btn-outline-secondary">ログイン/会員登録</button>
             </div>
 
             <div class="text-end">
@@ -35,31 +35,31 @@
         </header>
     </div>
 
-    <h1 class="text-center mt-4">会員登録</h1>
-
-        <form>
-    
-    <div class="name_input_wrapper">
-        <label for="name">名前</label>
-        <input class="name_input" type="text" id="name">
+    <div id="form">
+      <p class="toroku_design">新規会員登録</p>
+      <form action="post">
+        <p>氏名</p>
+        <p class="name">
+          <input type="name" name="name" />
+        </p>
+        <p>メールアドレス</p>
+        <p class="mail">
+          <input type="email" name="mail" />
+        </p>
+        <p>住所</p>
+        <p class="address">
+          <input type="address" name="address" />
+        </p>
+        <p>パスワード</p>
+        <p class="pass">
+          <input type="password" name="pass" />
+        </p>
+       
+        <p class="submit">
+          <input type="submit" value="登録する" />
+        </p>
+      </form>
     </div>
-    <br>
-
-    <label for="email">メールアドレス</label>
-    <input type="email" id="email">
-    <br>
-
-    <label for="password">パスワード</label>
-    <input type="password" id="password">
-    <br>
-
-    <label for="confirm">確認パスワード</label>
-    <input type="password" id="confirm">
-    <br>
-
-    <input type="submit" value="登録する">
-</form>
-
 
 <br>
         
