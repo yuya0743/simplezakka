@@ -26,9 +26,9 @@ public class LogInController {
     }
     
    
-    @Autowired
+    
     @GetMapping("/{email}")
-    public ResponseEntity<LoginInfo> getUsersById(@PathVariable String email) {
+    public ResponseEntity<LoginInfo> getUsersById(@PathVariable String email,@PathVariable String password) {
         LoginInfo user = loginService.finduserByEmail(email);
         if (user == null) {
             throw new Error("User not found with email: " + email);
