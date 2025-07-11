@@ -30,3 +30,35 @@
     margin: 10px 20px 30px 40px;
     padding: 30px;
 }
+
+/* ログイン・会員登録画面のデザイン */
+.body,p,form,input {
+    margin: 100;
+}
+#form {
+    width: 400px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #555;
+}
+form p {
+    font-size: 14px;
+}
+.form-title {
+    text-align: center;
+}
+.mail,
+.pass {
+    margin-bottom: 20px;
+}
+input[type="name"],
+input[type="address"],
+input[type="email"],
+input[type="password"] {
+    width: 300px;
+    padding: 4px;
+    font-size: 14px;
+}
+.submit {
+    text-align: right;
+}
