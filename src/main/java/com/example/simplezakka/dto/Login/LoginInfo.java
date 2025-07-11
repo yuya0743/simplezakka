@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginInfo
- {
-    
-    private String email;
+ {   private String email;
     
     private String password;
     // getter, setter
