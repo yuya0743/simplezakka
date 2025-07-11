@@ -1,9 +1,15 @@
 package com.example.simplezakka.service;
 
+import com.example.simplezakka.dto.Login.LoginInfo;
+import com.example.simplezakka.dto.Login.UserInfo;
+import com.example.simplezakka.dto.product.ProductDetail;
+import com.example.simplezakka.entity.Product;
 import com.example.simplezakka.entity.User;
 import com.example.simplezakka.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -42,5 +48,17 @@ public class AuthService {
 
     public void logout() {
         this.authenticatedUser = null;
+    }
+
+     public LoginInfo finduserByEmail(String email) {
+        Optional<User> userOpt = userRepository.findById(email);
+        return userOpt.map(this::convertToLogin).orElse(null);
+    }
+
+    public LoginInfo convertToLogin(User user) {
+        return new LoginInfo(
+                user.getEmail(),
+                user.getPassword()  
+        );
     }
 }
