@@ -11,8 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class DataLoader implements CommandLineRunner {
-
+public class Logindata implements CommandLineRunner {
     private final UserRepository userRepository;
 
     @Autowired
@@ -26,7 +25,7 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadSampleProducts() {
-        if (productRepository.count() > 0) {
+        if (UserRepository.count() > 0) {
             return; // すでにデータが存在する場合はスキップ
         }
 
@@ -70,7 +69,7 @@ public class DataLoader implements CommandLineRunner {
                 "hinako.kimura@avantcorp.com",
                 "京都府京都市左京区16-17-18",
                 "mypassword789"
-            ),
+            )
             
             
         );
@@ -79,11 +78,11 @@ public class DataLoader implements CommandLineRunner {
         userRepository.saveAll(user);
     }
     
-    private User createuser(String name, String email, String adress, String password) {
+    private User createuser(String name, String email, String address, String password) {
         User user = new user();
-        user.setName(name);
+        user.setusername(username);
         user.setEmail(email);
-        user.setAdress(adress);
+        user.setAddress(address);
         user.setPassword(password);
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
