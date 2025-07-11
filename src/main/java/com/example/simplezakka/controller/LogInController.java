@@ -1,3 +1,4 @@
+import com.example.simplezakka.dto.Login.LoginInfo;
 import com.example.simplezakka.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +15,19 @@ public class LogInController {
 
     private final AuthService loginService;
     
-    @Autowired
-    public loginController(AuthService loginService) {
+    
+    public LogInController(AuthService loginService) {
         this.loginService = loginService;
     }
     
    
     
     @GetMapping("/{users}")
-    public ResponseEntity<users> getUsersById(@PathVariable String email) {
-        LoginDetail email = loginService.findUserstByemail(email);
+    public ResponseEntity<LoginInfo> getUsersById(@PathVariable String email) {
+        LoginInfo user = loginService.findById(email);
         if (email == null) {
             throw new Error("User not found with email: " + email);
         }
-        return ResponseEntity.ok(UserId);
+        return ResponseEntity.ok(email);
     }
 }
