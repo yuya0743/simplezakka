@@ -1,3 +1,4 @@
+ 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,18 +8,41 @@
 <body>
 <p th:text="${message}"></p>
 <form th:action="@{/show_result}" th:object="${productForm}" method="post">
- 商品コード：<input type="text" th:field="*{code}">
+商品ID：<input type="text" th:field="*{product_id}">
 <BR />
 商品名：<input type="text" th:field="*{name}">
 <BR />
- 説明 ：<input type="text" th:field="*{description}">
+説明 ：<input type="text" th:field="*{description}">
 <BR />
 価格：<input type="text" th:field="*{price}">
 <BR />
-評価：<input type="text" th:field="*{evaluation}">
+在庫：<input type="text" th:field="*{stock}">
+<BR />
+イメージ：<input type="url" th:field="*{image_URL}">
+<BR />
+おすすめ：
+<select id="is_recomended" class="form-select me-2">
+                    <option value="">おすすめするか</option>
+                    <option value="true">する</option>
+                    <option value="folse">しない</option>
+                </select>
+<BR />
+カテゴリ：
+  <select id="category-select" class="form-select me-2">
+                    <option value="">すべてのカテゴリ</option>
+                    <option value="デスク周り">デスク周り</option>
+                    <option value="インテリア・雑貨">インテリア・雑貨</option>
+                    <option value="家具・寝具">家具・寝具</option>
+                    <option value="キッチン用品">キッチン用品</option>
+                    <option value="バッグ・トラベル">バッグ・トラベル</option>
+                </select>
+<BR />
+素材：<input type="text" th:field="*{is_recomended}">
 <BR />
 <input type="submit" value="登録"/>
 <BR />
 </form>
 </body>
 </html>
+ 
+ 
