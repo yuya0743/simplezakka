@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登録済み商品一覧（管理画面）</title>
+</head>
+<body>
+    <h1>登録済み商品一覧</h1>
+
+    <table border="1">
+        <tr>
+            <th>商品コード</th>
+            <th>商品名</th>
+            <th>価格</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.code}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a href="/a-top.html">トップに戻る</a>
+</body>
+</html>
