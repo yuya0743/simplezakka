@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
-public class LogInController {  
+public class LogInController {
 
     private final AuthService authService;
 
-    public LogInController(AuthService authService) { 
+    public LogInController(AuthService authService) {
         this.authService = authService;
     }
 

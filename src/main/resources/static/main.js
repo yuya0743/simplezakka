@@ -462,38 +462,29 @@ document.getElementById("category-select").addEventListener("click", filterProdu
 // 初期表示
 filterProducts();
 
-const API_BASE = '/api';
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault(); // 通常の送信を止める
 
-document.querySelector('form').addEventListener('submit', async function (event) {
-    event.preventDefault(); 
+  const email = this.email.value;
+  const password = this.password.value;
 
-    const email = document.querySelector('input[name="email"]').value;
-    const password = document.querySelector('input[name="password"]').value;
-
-    console.log("email:", email);
-    console.log("password:", password);
-
-    if (email && password) {
-        try {
-            const response = await fetch('/api/user/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-
-            if (response.ok) {
-                alert("ログイン成功");
-                window.location.href = '/'; 
-            } else {
-                alert("メールアドレスまたはパスワードが間違っています");
-            }
-        } catch (error) {
-            console.error("通信エラー:", error);
-            alert("通信エラーが発生しました");
-        }
+  fetch('/api/user/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
     } else {
-        alert("メールアドレスとパスワードを入力してください");
+      throw new Error('ログイン失敗');
     }
+  })
+  .then(data => {
+    console.log('ログイン成功', data);
+    // 成功時の処理（例: トップページへ遷移）
+  })
+  .catch(err => {
+    alert(err.message);
+  });
 });
