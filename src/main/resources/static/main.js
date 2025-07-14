@@ -463,7 +463,7 @@ document.getElementById("category-select").addEventListener("click", filterProdu
 filterProducts();
 
 document.querySelector('form').addEventListener('submit', function(e) {
-  e.preventDefault(); // 通常の送信を止める
+  e.preventDefault(); 
 
   const email = this.email.value;
   const password = this.password.value;
@@ -482,7 +482,6 @@ document.querySelector('form').addEventListener('submit', function(e) {
   })
   .then(data => {
     console.log('ログイン成功', data);
-    // 成功時の処理（例: トップページへ遷移）
   })
   .catch(err => {
     alert(err.message);
