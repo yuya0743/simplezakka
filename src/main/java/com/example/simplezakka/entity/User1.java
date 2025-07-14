@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class User1 {
@@ -46,6 +44,8 @@ public class User{
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+
+    
     
     
 }

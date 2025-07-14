@@ -22,5 +22,7 @@ public class UserResponse {
 
     private LocalDateTime registrationDate; 
 
+    
+
 }
  
