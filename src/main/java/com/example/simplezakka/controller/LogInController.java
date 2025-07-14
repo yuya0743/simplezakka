@@ -1,38 +1,27 @@
 package com.example.simplezakka.controller;
 
-import com.example.simplezakka.dto.Login.UserInfo;
-import com.example.simplezakka.entity.User;
-import com.example.simplezakka.repository.UserRepository;
 import com.example.simplezakka.dto.Login.LoginInfo;
 import com.example.simplezakka.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
 public class LogInController {
 
     private final AuthService loginService;
-    
-    
+
     public LogInController(AuthService loginService) {
         this.loginService = loginService;
     }
-    
-   
-    @Autowired
-    @GetMapping("/{email}")
-    public ResponseEntity<LoginInfo> getUsersById(@PathVariable String email) {
-        LoginInfo user = loginService.finduserByEmail(email);
-        if (user == null) {
-            throw new Error("User not found with email: " + email);
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginInfo loginInfo) {
+        boolean success = loginService.login(loginInfo.getEmail(), loginInfo.getPassword());
+        if (success) {
+            return ResponseEntity.ok("ログイン成功");
+        } else {
+            return ResponseEntity.status(401).body("メールアドレスまたはパスワードが間違っています");
         }
-        return ResponseEntity.ok(user);
     }
 }
