@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Spring-Shopsite</title>
+</head>
+<body>
+<p th:text="${message}"></p>
+<form th:action="@{/afeter_delete_product}" th:object="${productForm}" method="post">
+ 商品コード：<input type="text" th:field="*{code}">
+<BR />
+<input type="submit" value="削除"/>
+<BR />
+</form>
+</body>
+</html>
