@@ -464,16 +464,18 @@ filterProducts();
 
 const API_BASE = '/api';
 
-document.getElementById('login-btn').addEventListener('click', async function () {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+document.querySelector('form').addEventListener('submit', async function (event) {
+    event.preventDefault(); 
+
+    const email = document.querySelector('input[name="email"]').value;
+    const password = document.querySelector('input[name="password"]').value;
 
     console.log("email:", email);
     console.log("password:", password);
 
     if (email && password) {
         try {
-            const response = await fetch(`${API_BASE}/user/login`, {
+            const response = await fetch('/api/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -483,7 +485,7 @@ document.getElementById('login-btn').addEventListener('click', async function ()
 
             if (response.ok) {
                 alert("ログイン成功");
-                window.location.href = '/'; // ホームページにリダイレクト
+                window.location.href = '/'; 
             } else {
                 alert("メールアドレスまたはパスワードが間違っています");
             }
@@ -491,5 +493,7 @@ document.getElementById('login-btn').addEventListener('click', async function ()
             console.error("通信エラー:", error);
             alert("通信エラーが発生しました");
         }
+    } else {
+        alert("メールアドレスとパスワードを入力してください");
     }
 });
