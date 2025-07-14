@@ -162,11 +162,14 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         // カートに追加ボタンのイベント設定
-        modalBody.querySelector('.add-to-cart').addEventListener('click', function() {
+        modalBody.querySelector('.add-to-cart').addEventListener('click', function() {if (product.stock <= 0) {
+            alert('在庫がありません');
+            return;
+        }
             const quantity = parseInt(document.getElementById('quantity').value);
             addToCart(product.productId, quantity);
         });
-        
+   
         productModal.show();
     }
     
