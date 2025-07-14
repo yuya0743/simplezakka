@@ -57,13 +57,13 @@
     </div>
 
     <style>
+
         .example{
         font-size: 20px;
         }
         </style>
         <a href="kaiin-toroku.html" class="example d-block text-center mb-4">新規登録はこちら</a>
         <br>
-
 <br>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -74,7 +74,6 @@
 
             const email = this.email.value;
             const password = this.password.value;
-
 
             fetch('/api/user/login', {
                 method: 'POST',
@@ -94,10 +93,10 @@
                 })
                 .then((data) => {
                     alert('ログイン成功しました！');
-                    window.location.href = 'ichiran.html';
+                    window.location.href = 'mypage.html';
                 })
-                .catch((err) => {
-                    alert(err.message);
+                .catch((error) => {
+                    alert(error.message);
                 });
         });
     </script>
