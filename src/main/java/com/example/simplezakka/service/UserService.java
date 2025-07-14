@@ -4,7 +4,6 @@ import com.example.simplezakka.dto.User.UserInfo;
 import com.example.simplezakka.dto.User.UserRequest; 
 import com.example.simplezakka.dto.User.UserResponse; 
 import com.example.simplezakka.entity.User1; 
-import com.example.simplezakka.entity.User1.User;
 import com.example.simplezakka.repository.UserRepository; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
  
 @Service
-public class UserService {
+public class UserService{
  
     private final UserRepository userRepository;
 

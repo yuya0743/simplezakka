@@ -22,7 +22,11 @@ public class UserResponse {
 
     private LocalDateTime registrationDate; 
 
-    
+    public UserResponse(Integer userId, String message) {
+        this.userId = userId;
+        this.message = message;
+        this.registrationDate = LocalDateTime.now(); // Set current time as registration date
+    }
 
 }
  

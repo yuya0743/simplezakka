@@ -6,13 +6,12 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 
-public class User1 {
 
 @Entity
 @Table(name = "Users")
 @Data
 @NoArgsConstructor
-public class User{
+public class User1{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,4 +48,4 @@ public class User{
     
     
 }
-}
+

@@ -1,5 +1,6 @@
 package com.example.simplezakka.dto.User;
 
+
 public class UserInfo {
     private String name;
     private String email;
