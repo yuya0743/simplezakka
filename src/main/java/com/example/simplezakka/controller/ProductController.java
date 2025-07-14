@@ -44,10 +44,3 @@ public class ProductController {
         }
         return ResponseEntity.ok(product);
     }
-
-    @GetMapping("/a-kanri")
-        public String showAllProducts(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
-        return "a-kanri"; // resources/templates/a-kanri.html を表示
-    }
-}
