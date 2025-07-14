@@ -2,9 +2,12 @@
 
 -- usersテーブルの定義
 CREATE TABLE IF NOT EXISTS users (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(100) PRIMARY KEY,
     name VARCHAR(100),
-    email VARCHAR(100)
+    address VARCHAR(500),
+    password VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- productsテーブルの定義
