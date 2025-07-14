@@ -459,28 +459,3 @@ document.getElementById("category-select").addEventListener("click", filterProdu
 // 初期表示
 filterProducts();
 
-document.querySelector('form').addEventListener('submit', function(e) {
-  e.preventDefault(); 
-
-  const email = this.email.value;
-  const password = this.password.value;
-
-  fetch('/api/user/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      throw new Error('ログイン失敗');
-    }
-  })
-  .then(data => {
-    console.log('ログイン成功', data);
-  })
-  .catch(err => {
-    alert(err.message);
-  });
-});
