@@ -27,7 +27,7 @@ public class UserService{
     public UserResponse registerUser(UserRequest request) {
  
 
-        UserInfo user = new UserInfo();
+        User1 user = new User1();
 
 
         user.setName(request.getUserInfo().getName());
@@ -36,7 +36,7 @@ public class UserService{
 
         user.setAddress(request.getUserInfo().getAddress());
 
-        UserInfo savedUser = userRepository.save(user);
+        User1 savedUser = userRepository.save(user);
  
 
         return new UserResponse(savedUser.getUserId(), "会員登録が成功しました。");
