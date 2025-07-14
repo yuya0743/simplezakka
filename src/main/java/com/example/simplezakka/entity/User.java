@@ -39,8 +39,8 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 
-    public void setAdress(String adress) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setAdress'");
-    }
+    public void setAddress(String address) {
+    this.address = address;
+}
+
 }

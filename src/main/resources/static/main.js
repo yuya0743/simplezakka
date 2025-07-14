@@ -462,3 +462,29 @@ document.getElementById("category-select").addEventListener("click", filterProdu
 // 初期表示
 filterProducts();
 
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault(); // 通常の送信を止める
+
+  const email = this.email.value;
+  const password = this.password.value;
+
+  fetch('/api/user/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error('ログイン失敗');
+    }
+  })
+  .then(data => {
+    console.log('ログイン成功', data);
+    // 成功時の処理（例: トップページへ遷移）
+  })
+  .catch(err => {
+    alert(err.message);
+  });
+});
