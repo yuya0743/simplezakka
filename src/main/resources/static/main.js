@@ -505,3 +505,5 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('mypage-content').innerHTML = '<p>ログインしてください。</p>';
         });
 });
+
+
