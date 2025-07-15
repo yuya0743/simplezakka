@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/USERS")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService UserService;
+    private final UserService userService;
     
     @Autowired
-    public UserController(UserService UserService) {
-        this.UserService = UserService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
     
     @PostMapping
@@ -30,7 +30,7 @@ public class UserController {
             HttpSession session) {
         
         try {
-            UserResponse UserResponse = UserService.registerUser(UserRequest);
+            UserResponse UserResponse = userService.registerUser(UserRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(UserResponse);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
