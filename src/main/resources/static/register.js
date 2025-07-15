@@ -1,44 +1,31 @@
-document.addEventListener('DOMContentLoaded', function () {
-    async function submitUSERS() {
-        const form = document.getElementById('USERS-form');
+        document.getElementById('users-form').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        if (!form.checkValidity()) {
-            form.classList.add('was-validated');
-            return;
-        }
+        const name = form.querySelector('[name="name"]').value;
+        const email = form.querySelector('[name="email"]').value;
+        const address = form.querySelector('[name="address"]').value;
+        const password = form.querySelector('[name="password"]').value;
 
-        const USERSData = {
-            userInfo: {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                address: document.getElementById('address').value,
-                password: document.getElementById('password').value
-            }
-        };
 
-        try {
-            const response = await fetch(`${API_BASE}/USERS`, {
+            fetch('/api/users', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(USERSData)
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, address, password }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                throw new Error(text || '登録に失敗しました。');
             });
-
-            if (!response.ok) {
-                throw new Error('新規登録に失敗しました');
-            }
-
-            const USERS = await response.json();
-            displayUSERSComplete(USERS);
-            USERSCompleteModal.show();
-
-        } catch (error) {
-            console.error(error);
-            alert(error.message);
         }
-    }
-
-    const submitButton = document.getElementById('submit-button');
-    if (submitButton) {
-        submitButton.addEventListener('click', submitUSERS);
-    }
-});
+        return response.json(); 
+    })
+                .then((data) => {
+                    alert('登録が成功しました。');
+                    window.location.href = 'login.html';                 })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
