@@ -4,7 +4,6 @@ import com.example.simplezakka.dto.product.ProductDetail;
 
 import com.example.simplezakka.entity.Product;
 import com.example.simplezakka.repository.AdminRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public class AdminService {
 
     private final AdminRepository adminRepository;
     
-    @Autowired
+
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
