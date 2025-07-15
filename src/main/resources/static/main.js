@@ -453,34 +453,109 @@ function renderProducts() {
 }
 
 // 検索ボタン、カテゴリ変更時に実行
-document.getElementById("search-button").addEventListener("click", filterProducts);
-document.getElementById("category-select").addEventListener("click", filterProducts);
+const searchButton = document.getElementById("search-button");
+if (searchButton) {
+  searchButton.addEventListener("click", filterProducts);
+}
 
-// 初期表示
-filterProducts();
+const categorySelect = document.getElementById("category-select");
+if (categorySelect) {
+  categorySelect.addEventListener("click", filterProducts);
+}
 
-document.querySelector('form').addEventListener('submit', function(e) {
-  e.preventDefault(); 
 
-  const email = this.email.value;
-  const password = this.password.value;
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOMContentLoaded triggered");
 
-  fetch('/api/user/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  })
-  .then(res => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      throw new Error('ログイン失敗');
+  // ログインページのフォーム処理
+  const loginForm = document.querySelector('#login-form');
+  if (loginForm) {
+    console.log("ログインフォームあり → イベント登録");
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = this.email.value;
+      const password = this.password.value;
+
+      fetch('/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', 
+        body: JSON.stringify({ email, password })
+      })
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error('メールアドレスまたはパスワードが違います');
+          }
+        })
+        .then(data => {
+          console.log('ログイン成功:', data);
+          window.location.href = 'mypage.html';
+        })
+        .catch(err => {
+          alert(err.message);
+        });
+    });
+  } else {
+    console.log("ログインフォームなし → スキップ");
+  }
+
+  // マイページ表示処理
+  const nameElem = document.getElementById('user-name');
+  const emailElem = document.getElementById('user-email');
+  const addressElem = document.getElementById('user-address');
+
+  if (nameElem && emailElem && addressElem) {
+    console.log("マイページと判定 → fetch実行");
+
+    fetch('/api/user/mypage', {
+      credentials: 'include'
+    })
+      .then(response => {
+        console.log("fetch実行:", response);
+        if (!response.ok) {
+          throw new Error('ログインしていません');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("取得したデータ:", data);
+        nameElem.textContent = data.name || "名前なし";
+        emailElem.textContent = data.email || "メールなし";
+        addressElem.textContent = data.address || "住所なし";
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  } else {
+    console.log("マイページではない → fetchしない");
+  }
+
+  // 商品検索ボタン処理（存在する場合のみ）
+  const searchButton = document.getElementById("search-button");
+  const categorySelect = document.getElementById("category-select");
+
+  if (typeof filterProducts === 'function') {
+    if (searchButton) {
+      searchButton.addEventListener("click", filterProducts);
     }
-  })
-  .then(data => {
-    console.log('ログイン成功', data);
-  })
-  .catch(err => {
-    alert(err.message);
-  });
+    if (categorySelect) {
+      categorySelect.addEventListener("change", filterProducts); 
+    }
+    
+    // 初期表示
+    if (searchButton || categorySelect) {
+      filterProducts();
+    }
+  } else {
+    console.log("filterProducts 関数未定義 → スキップ");
+  }
 });
+
+
+
