@@ -44,6 +44,16 @@ public class UserService{
         return new UserResponse(savedUser.getUserId(), "会員登録が成功しました。");
 
     }
+
+    public void registerUser(String name, String password, String email, String address) {
+        User1 user = new User1();
+        user.setName(name);
+        user.setPassword(password);
+        user.setEmail(email);      // ★ここ重要
+        user.setAddress(address);
+        // 必要に応じて他の初期値もセット
+        userRepository.save(user);
+    }
  
 
 }
