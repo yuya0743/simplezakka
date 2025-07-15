@@ -1,6 +1,6 @@
 package com.example.simplezakka.service;
 
-import com.example.simplezakka.dto.Login.LoginInfo;
+import com.example.simplezakka.dto.Login.Logininfo;
 import com.example.simplezakka.dto.User.UserInfo;
 import com.example.simplezakka.entity.User1;
 import com.example.simplezakka.repository.AuthRepository;
@@ -46,13 +46,13 @@ public class AuthService {
     }
 
     // 🔧 修正ポイント：引数名と使い方
-    public LoginInfo findUserByEmail(String email) {
+    public Logininfo findUserByEmail(String email) {
         Optional<User1> userOpt = authRepository.findByEmail(email);
         return userOpt.map(this::convertToLogin).orElse(null);
     }
 
-    public LoginInfo convertToLogin(User1 user) {
-        return new LoginInfo(
+    public Logininfo convertToLogin(User1 user) {
+        return new Logininfo(
                 user.getEmail(),
                 user.getPassword()
         );
