@@ -12,6 +12,7 @@ public class ProductDetail {
     private String name;
     private Integer price;
     private String description;
+    private Boolean isRecommended;
     private Integer stock;
     private String imageUrl;
     private String category; 
