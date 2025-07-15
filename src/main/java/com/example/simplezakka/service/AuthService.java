@@ -42,16 +42,31 @@ public class AuthService {
         this.authenticatedUser = null;
     }
 
-    // 🔧 修正ポイント：引数名と使い方
     public Logininfo findUserByEmail(String email) {
         Optional<User1> userOpt = authRepository.findByEmail(email);
         return userOpt.map(this::convertToLogin).orElse(null);
     }
 
     public Logininfo convertToLogin(User1 user) {
-        return new Logininfo(
-                user.getEmail(),
-                user.getPassword()
-        );
+        Logininfo info = new Logininfo();
+        info.setName(user.getName());
+        info.setEmail(user.getEmail());
+        info.setPassword(user.getPassword());
+        info.setAddress(user.getAddress());
+        return info;
     }
+
+    public Logininfo getUserInfoByEmail(String email) {
+        Optional<User1> userOpt = authRepository.findByEmail(email);
+        if (userOpt.isPresent()) {
+            User1 user = userOpt.get();
+            Logininfo info = new Logininfo();
+            info.setName(user.getName());      
+            info.setEmail(user.getEmail());
+            info.setAddress(user.getAddress()); 
+            return info;
+        }
+        return null;
+    }
+
 }

@@ -459,6 +459,7 @@ document.getElementById("category-select").addEventListener("click", filterProdu
 // 初期表示
 filterProducts();
 
+//　ログイン機能
 document.querySelector('form').addEventListener('submit', function(e) {
   e.preventDefault(); 
 
@@ -483,4 +484,24 @@ document.querySelector('form').addEventListener('submit', function(e) {
   .catch(err => {
     alert(err.message);
   });
+});
+
+// マイページ表示機能
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('/api/user/mypage')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('ログインしていません');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('user-name').textContent = data.name;
+            document.getElementById('user-email').textContent = data.email;
+            document.getElementById('user-address').textContent = data.address;
+        })
+        .catch(error => {
+            console.error('マイページの読み込みエラー:', error);
+            document.getElementById('mypage-content').innerHTML = '<p>ログインしてください。</p>';
+        });
 });
