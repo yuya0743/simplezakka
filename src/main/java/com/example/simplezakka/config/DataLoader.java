@@ -2,7 +2,6 @@ package com.example.simplezakka.config;
 
 import com.example.simplezakka.entity.Product;
 import com.example.simplezakka.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,6 @@ public class DataLoader implements CommandLineRunner {
 
     private final ProductRepository productRepository;
 
-    @Autowired
     public DataLoader(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }

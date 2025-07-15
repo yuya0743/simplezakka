@@ -8,7 +8,8 @@
 
 <body>
   <p th:text="${message}">新規商品登録</p>
-  <div class="form-container"> <form th:action="@{/show_result}" th:object="${productForm}" method="post">
+  <div class="form-container"> 
+    <form th:action="@{/show_result}" th:object="${productForm}" method="post">
       商品ID：<input type="text" th:field="*{product_id}">
     <BR />
       商品名：<input type="text" th:field="*{name}">

@@ -1,10 +1,8 @@
 package com.example.simplezakka.service;
 
 import com.example.simplezakka.dto.Login.Logininfo;
-import com.example.simplezakka.dto.User.UserInfo;
 import com.example.simplezakka.entity.User1;
 import com.example.simplezakka.repository.AuthRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,8 +12,7 @@ public class AuthService {
 
     private final AuthRepository authRepository;
     private User1 authenticatedUser;
-
-    @Autowired
+    
     public AuthService(AuthRepository authRepository) {
         this.authRepository = authRepository;
         this.authenticatedUser = null;
