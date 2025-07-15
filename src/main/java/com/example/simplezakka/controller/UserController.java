@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping
 public class UserController {
 
     private final UserService userService;
@@ -24,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
     
-    @PostMapping
+    @PostMapping ("/api/users")
     public ResponseEntity<UserResponse> placeUser(
             @Valid @RequestBody UserRequest UserRequest,
             HttpSession session) {

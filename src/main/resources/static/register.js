@@ -1,10 +1,10 @@
         document.getElementById('users-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const name = this.name.value;
-            const email = this.email.value;
-            const address = this.address.value;
-            const password = this.password.value;
+        const name = form.querySelector('[name="name"]').value;
+        const email = form.querySelector('[name="email"]').value;
+        const address = form.querySelector('[name="address"]').value;
+        const password = form.querySelector('[name="password"]').value;
 
 
             fetch('/api/users', {

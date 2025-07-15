@@ -6,7 +6,6 @@ public class UserInfo {
     private String email;
     private String address; 
     private String password;
-    private Integer UserId;
 
     // Getters and Setters
     public String getName() {
@@ -36,12 +35,6 @@ public class UserInfo {
     }
     public void setPassword(String password) {
         this.password = password;
-    }
-    public Integer getUserId() {
-        return UserId;
-    }
-    public void setUserId(Integer userId) {
-        UserId = userId;
     }
 
 

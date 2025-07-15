@@ -36,6 +36,8 @@ public class UserService{
 
         user.setAddress(request.getUserInfo().getAddress());
 
+        user.setPassword(request.getUserInfo().getPassword());
+
         User1 savedUser = userRepository.save(user);
  
 
