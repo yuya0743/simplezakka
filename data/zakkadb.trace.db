@@ -1,20 +1,4 @@
-2025-07-11 14:59:34.590707+09:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "CREATE TABLE IF NOT EXISTS users ([*]"; 期待されるステートメント "identifier"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS users ([*]"; expected "identifier"; SQL statement:
-CREATE TABLE IF NOT EXISTS users ( [42001-232]
-2025-07-11 15:00:14.371344+09:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "CREATE TABLE IF NOT EXISTS users ([*]"; 期待されるステートメント "identifier"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS users ([*]"; expected "identifier"; SQL statement:
-CREATE TABLE IF NOT EXISTS users ( [42001-232]
-2025-07-11 15:06:42.514493+09:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "CREATE TABLE IF NOT EXISTS users ([*]"; 期待されるステートメント "identifier"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS users ([*]"; expected "identifier"; SQL statement:
-CREATE TABLE IF NOT EXISTS users ( [42001-232]
-2025-07-11 15:15:47.604770+09:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "CREATE TABLE IF NOT EXISTS users ([*]"; 期待されるステートメント "identifier"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS users ([*]"; expected "identifier"; SQL statement:
-CREATE TABLE IF NOT EXISTS users ( [42001-232]
-2025-07-11 15:16:48.515412+09:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "CREATE TABLE IF NOT EXISTS users ([*]"; 期待されるステートメント "identifier"
-Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS users ([*]"; expected "identifier"; SQL statement:
-CREATE TABLE IF NOT EXISTS users ( [42001-232]
+2025-07-15 11:45:01.998409+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: テーブル "USERS" はすでに存在します
+Table "USERS" already exists; SQL statement:
+CREATE TABLE users ( user_id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, address VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, created_at TIMESTAMP, updated_at TIMESTAMP ) [42101-232]
