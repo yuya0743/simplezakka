@@ -33,7 +33,7 @@
 
 /* ログイン・会員登録画面のデザイン */
 .body,p,form,input {
-    margin: 100;
+    margin: 200;
 }
 #form {
     width: 400px;
@@ -52,10 +52,10 @@ form p {
     margin-bottom: 20px;
 }
 input[type="name"],
-input[type="address"],
+input[type="text"],
 input[type="email"],
 input[type="password"] {
-    width: 300px;
+    width: 250px;
     padding: 4px;
     font-size: 14px;
 }
