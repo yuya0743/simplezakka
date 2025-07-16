@@ -21,7 +21,7 @@ public class LogInController {
     public ResponseEntity<Logininfo> login(@RequestBody Logininfo loginInfo, HttpSession session) {
         boolean success = authService.login(loginInfo.getEmail(), loginInfo.getPassword());
         if (success) {
-            session.setAttribute("userEmail", loginInfo.getEmail()); // セッションに保存
+            session.setAttribute("userEmail", loginInfo.getEmail()); 
             return ResponseEntity.ok(loginInfo);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
