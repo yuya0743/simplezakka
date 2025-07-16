@@ -557,5 +557,19 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-
+//　ログアウト
+document.getElementById('logoutButton').addEventListener('click', () => {
+  fetch('api/user/logout', {
+    method: 'POST',
+    credentials: 'include', 
+  })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '/ichiran.html'; 
+      } else {
+        alert('ログアウトに失敗しました。');
+      }
+    })
+    .catch(error => console.error('エラー:', error));
+});
 
