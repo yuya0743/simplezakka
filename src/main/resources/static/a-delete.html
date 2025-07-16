@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Spring-Shopsite</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Spring-Shopsite</title>
 </head>
 <body>
-    <p>商品削除</p>
-    <form th:action="@{/admin/products/delete}" th:object="${productForm}" method="post">
-    商品ID：<input type="text" th:field="*{product_id}" />
-    <br />
-    <input type="submit" value="削除" />
-    <br />
-    </form>
+    <p th:text="${message}"></p>
+
+    <!-- 商品一覧＋削除ボタン -->
+    <table border="1">
+    <tr>
+    <th>ID</th>
+    <th>商品名</th>
+    <th>操作</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.productId}"></td>
+        <td th:text="${product.name}"></td>
+        <td>
+            <button type="button" onclick="deleteProduct([[${product.productId}]])">削除</button>
+        </td>
+    </tr>
+    </table>
+
+    <script>
+    function deleteProduct(id) {
+        if (!confirm("本当に削除しますか？")) return;
+        fetch(`/api/products/${id}`, {method: "DELETE"})
+            .then(res => {
+        if (!res.ok) throw new Error('削除失敗');
+            alert("削除しました");
+            location.reload();
+        })
+        .catch(() => alert("削除に失敗しました"));
+    }
+    </script>
 </body>
 </html>
+
+ 

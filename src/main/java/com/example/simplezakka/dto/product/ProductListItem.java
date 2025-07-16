@@ -14,4 +14,6 @@ public class ProductListItem {
     private String imageUrl;
     private String category; 
     private String material;
+    private Integer stock;
+    private String description;
 }

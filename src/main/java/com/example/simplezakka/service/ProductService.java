@@ -38,7 +38,9 @@ public class ProductService {
                 product.getPrice(),
                 product.getImageUrl(),
                 product.getCategory(),
-                product.getMaterial()
+                product.getMaterial(),
+                product.getStock(),
+                product.getDescription()     
         );
     }
     
@@ -56,48 +58,56 @@ public class ProductService {
         );
     }
 
-    @Transactional
-    public ProductDetail createProduct(ProductDetail productDetail) {
-        Product product = new Product();
-        product.setName(productDetail.getName());
-        product.setPrice(productDetail.getPrice());
-        product.setDescription(productDetail.getDescription());
-        product.setIsRecommended(productDetail.getIsRecommended());
-        product.setStock(productDetail.getStock());
-        product.setImageUrl(productDetail.getImageUrl());
-        product.setCategory(productDetail.getCategory());
-        product.setMaterial(productDetail.getMaterial());
+ // 以降追加 
 
-        Product savedProduct = productRepository.save(product);
-        return convertToDetail(savedProduct);
-    }
+@Transactional 
 
-    @Transactional
-    public ProductDetail updateProduct(Integer productId, ProductDetail productDetail) {
-        Optional<Product> productOpt = productRepository.findById(productId);
-        if (productOpt.isEmpty()) {
-            return null;
-        }
-        Product product = productOpt.get();
-        product.setName(productDetail.getName());
-        product.setPrice(productDetail.getPrice());
-        product.setDescription(productDetail.getDescription());
-        product.setIsRecommended(productDetail.getIsRecommended());
-        product.setStock(productDetail.getStock());
-        product.setImageUrl(productDetail.getImageUrl());
-        product.setCategory(productDetail.getCategory());
-        product.setMaterial(productDetail.getMaterial());
+public ProductDetail createProduct(ProductDetail productDetail) { 
+    Product product = new Product(); 
+    product.setName(productDetail.getName()); 
+    product.setPrice(productDetail.getPrice()); 
+    product.setDescription(productDetail.getDescription()); 
+    product.setIsRecommended(productDetail.getIsRecommended()); 
+    product.setStock(productDetail.getStock()); 
+    product.setImageUrl(productDetail.getImageUrl()); 
+    product.setCategory(productDetail.getCategory()); 
+    product.setMaterial(productDetail.getMaterial()); 
+    
+    Product savedProduct = productRepository.save(product); 
+    return convertToDetail(savedProduct); 
+} 
 
-        Product updatedProduct = productRepository.save(product);
-        return convertToDetail(updatedProduct);
-    }
+ 
 
-    @Transactional
-    public boolean deleteProduct(Integer productId) {
-        if (!productRepository.existsById(productId)) {
-            return false;
-        }
-        productRepository.deleteById(productId);
-        return true;
-    }
-}
+@Transactional 
+public ProductDetail updateProduct(Integer productId, ProductDetail productDetail) { 
+    Optional<Product> productOpt = productRepository.findById(productId); 
+    if (productOpt.isEmpty()) { 
+        return null; 
+    } 
+    
+    Product product = productOpt.get(); 
+    product.setName(productDetail.getName()); 
+    product.setPrice(productDetail.getPrice()); 
+    product.setDescription(productDetail.getDescription()); 
+    product.setIsRecommended(productDetail.getIsRecommended()); 
+    product.setStock(productDetail.getStock()); 
+    product.setImageUrl(productDetail.getImageUrl()); 
+    product.setCategory(productDetail.getCategory()); 
+    product.setMaterial(productDetail.getMaterial()); 
+    
+    Product updatedProduct = productRepository.save(product); 
+    return convertToDetail(updatedProduct); 
+} 
+
+ 
+
+@Transactional 
+public boolean deleteProduct(Integer productId) { 
+    if (!productRepository.existsById(productId)) { 
+        return false; 
+    } 
+    productRepository.deleteById(productId); 
+    return true; 
+} 
+}    
