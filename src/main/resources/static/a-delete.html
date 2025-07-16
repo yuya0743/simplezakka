@@ -5,12 +5,12 @@
 <title>Spring-Shopsite</title>
 </head>
 <body>
-<p th:text="${message}"></p>
-<form th:action="@{/afeter_delete_product}" th:object="${productForm}" method="post">
- 商品コード：<input type="text" th:field="*{code}">
-<BR />
-<input type="submit" value="削除"/>
-<BR />
-</form>
+    <p>商品削除</p>
+    <form th:action="@{/admin/products/delete}" th:object="${productForm}" method="post">
+    商品ID：<input type="text" th:field="*{product_id}" />
+    <br />
+    <input type="submit" value="削除" />
+    <br />
+    </form>
 </body>
 </html>
