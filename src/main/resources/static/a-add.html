@@ -3,30 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <title>新規商品登録 | Spring-Shopsite</title>
-  <link href="style.css" rel="stylesheet">
+  <link href="a-add.css" rel="stylesheet">
 </head>
 
 <body>
   <p th:text="${message}">新規商品登録</p>
   <div class="form-container">
     <form id="registerForm">
-      商品名：<input type="text" id="name" required>
+      商品名   <input type="text" id="name" required>
       <br/>
 
-      説明 ：<input type="text" id="description">
+      説明     <input type="text" id="description">
       <br/>
 
-      価格：<input type="number" id="price" required>
+      価格     <input type="number" id="price" required>
       <br/>
 
-      在庫：<input type="number" id="stock" required>
+      在庫       <input type="number" id="stock" required>
       <br/>
 
-      イメージURL：<input type="url" id="imageUrl">
+      イメージURL<input type="url" id="imageUrl">
       <br/>
 
-      おすすめ：
-      <select id="isRecommended">
+      おすすめ<select id="isRecommended">
         <option value="">選択してください</option>
         <option value="true">する</option>
         <option value="false">しない</option>
@@ -34,8 +33,7 @@
 
       <br/>
 
-      カテゴリ：
-      <select id="category">
+      カテゴリ<select id="category">
         <option value="">カテゴリ選択</option>
         <option value="デスク周り">デスク周り</option>
         <option value="インテリア・雑貨">インテリア・雑貨</option>
@@ -46,14 +44,16 @@
       
       <br/>
 
-      素材：<input type="text" id="material">
+      素材<input type="text" id="material">
     
       <br/>
-      
+      <div class="submit-container">
+       
       <input type="submit" value="登録"/>
-      
+      </div>
 
     </form>
+    
   </div>
   <script>
     document.getElementById('registerForm').onsubmit = function(e) {
