@@ -5,20 +5,51 @@
 <title>Spring-Shopsite</title>
 </head>
 <body>
-<p th:text="${message}"></p>
-<form th:action="@{/show_result}" th:object="${productForm}" method="post">
- 商品コード：<input type="text" th:field="*{code}">
-<BR />
-商品名：<input type="text" th:field="*{name}">
-<BR />
- 説明 ：<input type="text" th:field="*{description}">
-<BR />
-価格：<input type="text" th:field="*{price}">
-<BR />
-評価：<input type="text" th:field="*{evaluation}">
-<BR />
-<input type="submit" value="更新"/>
-<BR />
+<p>商品情報更新</p>
+<form th:action="@{/admin/products/update}" th:object="${productForm}" method="post">
+
+    商品ID：<input type="text" th:field="*{product_id}" readonly />
+    <br />
+
+    商品名：<input type="text" th:field="*{name}" />
+    <br />
+
+    説明 ：<input type="text" th:field="*{description}" />
+    <br />
+
+    価格：<input type="number" th:field="*{price}" />
+    <br />
+
+    在庫：<input type="number" th:field="*{stock}" />
+    <br />
+
+    イメージURL：<input type="url" th:field="*{image_URL}" />
+    <br />
+
+    おすすめ：
+    <select th:field="*{is_recommended}">
+        <option value="">選択してください</option>
+        <option value="true">する</option>
+        <option value="false">しない</option>
+    </select>
+    <br />
+
+    カテゴリ：
+    <select th:field="*{category}">
+        <option value="">選択してください</option>
+        <option value="デスク周り">デスク周り</option>
+        <option value="インテリア・雑貨">インテリア・雑貨</option>
+        <option value="家具・寝具">家具・寝具</option>
+        <option value="キッチン用品">キッチン用品</option>
+        <option value="バッグ・トラベル">バッグ・トラベル</option>
+    </select>
+    <br />
+
+    素材：<input type="text" th:field="*{material}" />
+    <br />
+
+    <input type="submit" value="更新" />
+    <br />
 </form>
 </body>
 </html>
