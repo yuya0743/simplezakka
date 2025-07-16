@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("マイページではない → fetchしない");
   }
 
-  // 商品検索ボタン処理（存在する場合のみ）
+  // 商品検索ボタン処理
   const searchButton = document.getElementById("search-button");
   const categorySelect = document.getElementById("category-select");
 
