@@ -19,6 +19,27 @@ public class UserService{
 
     @Transactional
 
+    /* public UserResponse registerUser(UserRequest request) {
+
+
+        User1 user = new User1();
+
+
+        user.setName(request.getUserInfo().getName());
+
+        user.setEmail(request.getUserInfo().getEmail());
+
+        user.setAddress(request.getUserInfo().getAddress());
+
+        user.setPassword(request.getUserInfo().getPassword());
+
+        User1 savedUser = userRepository.save(user);
+ 
+
+        return new UserResponse(savedUser.getUserId(), "会員登録が成功しました。");
+
+    }*/
+
     public void registerUser(String name, String password, String email, String address) {
         User1 user = new User1();
         user.setName(name);
