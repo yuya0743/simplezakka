@@ -22,7 +22,7 @@ class AuthRepositoryTest {
 
     @Test
     @DisplayName("findByEmail：ユーザーが存在する場合、User1 を返す")
-    void findByEmail_ShouldReturnUser_WhenExists() {
+    void findByEmail_ShouldReturnUser_WhenEmailExists() {
         // Arrange
         User1 user = new User1();
         user.setName("テストユーザー");
@@ -43,7 +43,7 @@ class AuthRepositoryTest {
 
     @Test
     @DisplayName("findByEmail：ユーザーが存在しない場合、Optional.empty() を返す")
-    void findByEmail_ShouldReturnEmpty_WhenNotExists() {
+    void findByEmail_ShouldReturnEmpty_WhenEmailNotExists() {
         // Act
         Optional<User1> result = authRepository.findByEmail("unknown@example.com");
 
