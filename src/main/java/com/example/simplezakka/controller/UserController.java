@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -30,11 +30,12 @@ public class UserController {
 
     }
     
-   @PostMapping(value = "/api/users", consumes = "application/json")
+   @PostMapping(value = "/users", consumes = "application/json")
     @ResponseBody
-    public String registerUserJson(@RequestBody UserInfo user) {
-    // JSONデータを受け取り、ユーザーを登録する処理
-    userService.registerUser(user.getName(), user.getPassword(), user.getEmail(), user.getAddress());
-    return "{\"message\":\"登録が完了しました！\"}";
-}
+    public ResponseEntity<UserInfo>registerUserJson(@RequestBody UserInfo user, HttpSession session) {
+        userService.registerUser(user.getName(), user.getPassword(), user.getEmail(), user.getAddress());
+        session.setAttribute("userinfo", user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
 }
