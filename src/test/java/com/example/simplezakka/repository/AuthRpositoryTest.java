@@ -25,10 +25,10 @@ class AuthRepositoryTest {
     void findByEmail_ShouldReturnUser_WhenEmailExists() {
         // Arrange
         User1 user = new User1();
-        user.setName("テストユーザー");
-        user.setEmail("test@example.com");
+        user.setName("ユーザー");
+        user.setEmail("user@email.com");
         user.setPassword("password");
-        user.setAddress("東京都渋谷区");
+        user.setAddress("東京都港区");
 
         authRepository.save(user);
 
