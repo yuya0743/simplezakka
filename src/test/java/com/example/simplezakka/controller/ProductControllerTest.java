@@ -42,8 +42,8 @@ class ProductControllerTest {
         productListItem1 = new ProductListItem(1, "リスト商品1", 100, "/list1.png","カテゴリ１", "素材１", 10, "説明1");
         productListItem2 = new ProductListItem(2, "リスト商品2", 200, "/list2.png", "カテゴリ２", "素材２", 5, "説明2");
 
-        productDetail1 = new ProductDetail(1, "詳細商品1", 100, "詳細説明1",true, 10, "/detail1.png", "カテゴリ１", "素材１");
-        productDetailWithNulls = new ProductDetail(3, "詳細商品3",300, null,false, 5, null,"カテゴリ２","素材2"); // descriptionとimageUrlがnull
+        productDetail1 = new ProductDetail(1, "詳細商品1", 100,"/detail1.png","カテゴリ１","素材１" , 10, "詳細説明1");
+        productDetailWithNulls = new ProductDetail(3, "詳細商品3",300, null,"カテゴリ２","素材2",10,null); // descriptionとimageUrlがnull
 
         // --- Serviceメソッドのデフォルトモック設定 (lenient) ---
         // デフォルトではfindAllProductsは2つのアイテムを返す
