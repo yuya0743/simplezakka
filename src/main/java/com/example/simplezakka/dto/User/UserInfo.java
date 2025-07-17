@@ -1,10 +1,20 @@
 package com.example.simplezakka.dto.User;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 public class UserInfo {
+    @NotBlank
+    @Valid
     private String name;
+    @NotBlank
+    @Valid
     private String email;
-    private String address; 
+    @NotBlank
+    @Valid
+    private String address;
+    @NotBlank
+    @Valid 
     private String password;
 
     // Getters and Setters
