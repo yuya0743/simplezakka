@@ -206,3 +206,15 @@ MERGE INTO users (name, email, address, password) KEY (user_id) VALUES ('山田�
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2025-07-17 10:15:09.032913+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: 列 "IMAGE_URL CHARACTER VARYING(255)" の値が長過ぎます: "'https://www.google.com/imgres?q=%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC&i... (372)"
+Value too long for column "IMAGE_URL CHARACTER VARYING(255)": "'https://www.google.com/imgres?q=%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC&i... (372)"; SQL statement:
+insert into products (category,created_at,description,image_url,is_recommended,material,name,price,stock,updated_at,product_id) values (?,?,?,?,?,?,?,?,?,?,default) [22001-232]
+2025-07-17 10:15:15.741659+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: 列 "IMAGE_URL CHARACTER VARYING(255)" の値が長過ぎます: "'https://www.google.com/imgres?q=%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC&i... (372)"
+Value too long for column "IMAGE_URL CHARACTER VARYING(255)": "'https://www.google.com/imgres?q=%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC&i... (372)"; SQL statement:
+insert into products (category,created_at,description,image_url,is_recommended,material,name,price,stock,updated_at,product_id) values (?,?,?,?,?,?,?,?,?,?,default) [22001-232]
+2025-07-17 10:15:26.038972+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: 列 "IMAGE_URL CHARACTER VARYING(255)" の値が長過ぎます: "'https://www.google.com/imgres?q=%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC&i... (372)"
+Value too long for column "IMAGE_URL CHARACTER VARYING(255)": "'https://www.google.com/imgres?q=%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC&i... (372)"; SQL statement:
+insert into products (category,created_at,description,image_url,is_recommended,material,name,price,stock,updated_at,product_id) values (?,?,?,?,?,?,?,?,?,?,default) [22001-232]

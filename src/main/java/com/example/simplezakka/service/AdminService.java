@@ -3,7 +3,7 @@ package com.example.simplezakka.service;
 import com.example.simplezakka.dto.product.ProductDetail;
 
 import com.example.simplezakka.entity.Product;
-import com.example.simplezakka.repository.AdminRepository;
+import com.example.simplezakka.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,21 +13,21 @@ import java.util.stream.Collectors;
 @Service
 public class AdminService {
 
-    private final AdminRepository adminRepository;
+    private final ProductRepository productRepository;
     
 
-    public AdminService(AdminRepository adminRepository) {
-        this.adminRepository = adminRepository;
+    public AdminService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
     
     public List<ProductDetail> findAllProducts() {
-        return adminRepository.findAll().stream()
+        return productRepository.findAll().stream()
                 .map(this::convertToDetail)
                 .collect(Collectors.toList());
     }
     
     public ProductDetail findProductById(Integer productId) {
-        Optional<Product> productOpt = adminRepository.findById(productId);
+        Optional<Product> productOpt = productRepository.findById(productId);
         return productOpt.map(this::convertToDetail).orElse(null);
     }
     
