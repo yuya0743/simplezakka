@@ -1,9 +1,14 @@
 package com.example.simplezakka.service;
 
 import com.example.simplezakka.dto.Login.Logininfo;
+import com.example.simplezakka.dto.product.ProductDetail;
+import com.example.simplezakka.entity.Product;
 import com.example.simplezakka.entity.User1;
 import com.example.simplezakka.repository.AuthRepository;
+import com.example.simplezakka.repository.UserRepository;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -34,4 +39,33 @@ public class AuthService {
         info.setAddress(user.getAddress());
         return info;
     }
+
+private Logininfo convertToDetail(User1 user) {
+        return new Logininfo(
+                user.getName(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getAddress()
+           
+        );
+    }
+
+    @Transactional 
+public Logininfo updatelogininfo(String email, Logininfo loginInfo) { 
+    Optional<User1> userOpt = authRepository.findByEmail(email); 
+    if (userOpt.isEmpty()) { 
+        return null; 
+    } 
+    
+    User1 info = userOpt.get(); 
+    info.setName(loginInfo.getName()); 
+    info.setEmail(loginInfo.getEmail()); 
+    info.setPassword(loginInfo.getPassword()); 
+    info.setAddress(loginInfo.getAddress()); 
+    
+   
+    
+    User1 updatedUser1 = authRepository.save(info); 
+    return convertToDetail(updatedUser1); 
+} 
 }

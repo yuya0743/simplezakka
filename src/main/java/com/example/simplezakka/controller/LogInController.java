@@ -6,6 +6,14 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
+import java.util.List;
+
+import javax.management.StringValueExp;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/user")
@@ -48,5 +56,23 @@ public class LogInController {
         session.invalidate();
         return ResponseEntity.ok("ログアウトしました");
     }
-}
+
+
+ 
+
+     // 商品の更新 
+    @PutMapping("/mypageedit") 
+    public ResponseEntity<Logininfo> updateProduct( 
+        @PathVariable String email, 
+        @Valid @RequestBody Logininfo logininfo) { 
+            
+            Logininfo updatedInfo = authService.updatelogininfo(email, logininfo); 
+            if (updatedInfo == null) { 
+                return ResponseEntity.notFound().build(); 
+            } 
+            
+            return ResponseEntity.ok(updatedInfo); 
+         } 
+        }
+
 

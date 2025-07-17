@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>ユーザ情報編集</title>
+</head>
+<body>
+  <h1>登録情報編集</h1>
+  <form id="editForm">
+    氏名：<input type="text" id="name"><br>
+    メールアドレス ：<input type="text" id="email"><br>
+    パスワード：<input type="text" id="password"><br>
+    住所：<input type="text" id="address"><br>
+    <input type="submit" value="保存">
+  </form>
+  
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch("/api/mypage")
+  .then(response => response.json())
+  .then(data2 => {
+    document.getElementById("name").value = data2.name;
+    document.getElementById("mailaddress").value = data2.mailaddress;
+    document.getElementById("address").value = data2.address;
+  });
+ 
+        
+        const id = data2.mailaddress;
+       
+        document.getElementById('editForm').onsubmit = function(e) {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                address: document.getElementById('address').value
+               
+            };
+            fetch(`/api/mypageedit`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error();
+                alert("登録情報を更新しました！");
+                window.location.href = "mypage.html";
+            })
+            .catch(() => alert("更新に失敗しました"));
+        };
+    });
+    </script>
+</html>
+ 
