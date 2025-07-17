@@ -33,12 +33,12 @@ class AuthRepositoryTest {
         authRepository.save(user);
 
         // Act
-        Optional<User1> result = authRepository.findByEmail("test@example.com");
+        Optional<User1> result = authRepository.findByEmail("user@email.com");
 
         // Assert
         assertThat(result).isPresent();
-        assertThat(result.get().getEmail()).isEqualTo("test@example.com");
-        assertThat(result.get().getName()).isEqualTo("テストユーザー");
+        assertThat(result.get().getEmail()).isEqualTo("user@email.com");
+        assertThat(result.get().getName()).isEqualTo("ユーザー");
     }
 
     @Test
