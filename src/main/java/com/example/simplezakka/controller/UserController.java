@@ -32,7 +32,7 @@ public class UserController {
     
    @PostMapping(value = "/users", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity<UserInfo>registerUserJson(@RequestBody UserInfo user, HttpSession session) {
+    public ResponseEntity<UserInfo>registerUserJson(@RequestBody @Valid UserInfo user, HttpSession session) {
         userService.registerUser(user.getName(), user.getPassword(), user.getEmail(), user.getAddress());
         session.setAttribute("userinfo", user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
