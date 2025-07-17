@@ -48,11 +48,11 @@ public class ProductService {
         return new ProductDetail(
                 product.getProductId(),
                 product.getName(),
-                product.getPrice(),
                 product.getDescription(),
-                product.getIsRecommended(),
+                product.getPrice(),
                 product.getStock(),
                 product.getImageUrl(),
+                product.getIsRecommended(),
                 product.getCategory(),
                 product.getMaterial()
         );
