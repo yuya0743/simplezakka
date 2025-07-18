@@ -34,3 +34,4 @@ public class ProductDetail {
     private Boolean isRecommended;
     private String category; 
     private String material;
+}
