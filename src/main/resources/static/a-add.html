@@ -53,34 +53,55 @@
       <input type="submit" value="登録"/>
       
 
-    </form>
-  </div>
+    
+    <div id="errorMsg" style="color:red;margin-bottom:8px;"></div>
+
   <script>
     document.getElementById('registerForm').onsubmit = function(e) {
-      e.preventDefault();
-      const data = {
-        name: document.getElementById('name').value,
-        description: document.getElementById('description').value,
-        price: Number(document.getElementById('price').value),
-        stock: Number(document.getElementById('stock').value),
-        imageUrl: document.getElementById('imageUrl').value,
-        isRecommended: document.getElementById('isRecommended').value === "true",
-        category: document.getElementById('category').value,
-        material: document.getElementById('material').value
-      };
-      fetch('/api/products', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-      })
-      .then(res => {
-        if (!res.ok) throw new Error();
-        alert("商品を登録しました！");
-        window.location.href = "a-top.html";
-      })
-      .catch(() => alert("登録に失敗しました"));
-    };
-  </script>
+  e.preventDefault();
+  const data = {
+    name: document.getElementById('name').value,
+    description: document.getElementById('description').value,
+    price: Number(document.getElementById('price').value),
+    stock: Number(document.getElementById('stock').value),
+    imageUrl: document.getElementById('imageUrl').value,
+    isRecommended: document.getElementById('isRecommended').value === "true",
+    category: document.getElementById('category').value,
+    material: document.getElementById('material').value
+  };
+
+  document.getElementById('errorMsg').textContent = "";
+
+  fetch('/api/products', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+  .then(async res => {
+    if (!res.ok) {
+      const errorData = await res.json();
+      // バリデーションエラー（400）の場合は複数エラーをまとめて表示
+      if (res.status === 400 && typeof errorData === "object") {
+        throw new Error(
+          Object.entries(errorData)
+            .map(([field, msg]) => `${field}: ${msg}`)
+            .join('\n')
+        );
+      } else {
+        throw new Error(errorData.message || "登録に失敗しました");
+      }
+    }
+    return res.json();
+  })
+  .then(() => {
+    alert("商品を登録しました！");
+    window.location.href = "a-top.html";
+  })
+  .catch(err => {
+    document.getElementById('errorMsg').textContent = err.message;
+  });
+};
+
+</script>
 </body>
 </html>
- 
