@@ -1,5 +1,7 @@
 package com.example.simplezakka.dto.User;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
@@ -15,6 +17,7 @@ public class UserInfo {
     private String address;
     @NotBlank
     @Valid 
+    @Length(min = 4, max = 20, message = "Password must be between 4 and 20 characters")
     private String password;
 
     // Getters and Setters
