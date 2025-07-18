@@ -41,6 +41,7 @@ public class ProductService {
                 product.getMaterial(),
                 product.getStock(),
                 product.getDescription()     
+
         );
     }
     
@@ -55,6 +56,7 @@ public class ProductService {
                 product.getIsRecommended(),
                 product.getCategory(),
                 product.getMaterial()
+
         );
     }
 

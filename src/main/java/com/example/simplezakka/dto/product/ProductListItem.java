@@ -22,6 +22,7 @@ public class ProductListItem {
     private Integer price;
 
     private String imageUrl;
+
     private String category; 
     private String material;
 
@@ -32,4 +33,5 @@ public class ProductListItem {
 
     @Size(max = 300, message = "説明文は300字以内でなければなりません")  // 300字以内
     private String description;
+
 }
