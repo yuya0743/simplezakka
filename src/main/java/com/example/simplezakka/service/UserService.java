@@ -19,7 +19,7 @@ public class UserService{
 
     @Transactional
 
-    public UserResponse registerUser(UserRequest request) {
+    /* public UserResponse registerUser(UserRequest request) {
 
 
         User1 user = new User1();
@@ -38,7 +38,7 @@ public class UserService{
 
         return new UserResponse(savedUser.getUserId(), "会員登録が成功しました。");
 
-    }
+    }*/
 
     public void registerUser(String name, String password, String email, String address) {
         User1 user = new User1();
