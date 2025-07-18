@@ -31,6 +31,10 @@ public class Product {
     private String imageUrl;
     
     private Boolean isRecommended;
+
+    private String category;
+
+    private String material;
     
     private LocalDateTime createdAt;
     
