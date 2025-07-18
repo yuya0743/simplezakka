@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCartModalContent();
         cartModal.show();
     });
+
+    // ログインクリックイベント/会員登録クリックイベント
+    document.getElementById('login-btn').addEventListener('click', function() {
+        console.log("ボタンを押しました");
+        window.location.href = 'login.html'
+    });
     
     // 注文手続きボタンクリックイベント
     document.getElementById('checkout-btn').addEventListener('click', function() {
@@ -112,11 +118,14 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         // カートに追加ボタンのイベント設定
-        modalBody.querySelector('.add-to-cart').addEventListener('click', function() {
+        modalBody.querySelector('.add-to-cart').addEventListener('click', function() {if (product.stock <= 0) {
+            alert('在庫がありません');
+            return;
+        }
             const quantity = parseInt(document.getElementById('quantity').value);
             addToCart(product.productId, quantity);
         });
-        
+   
         productModal.show();
     }
     
@@ -361,3 +370,162 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 });
+// 商品データ例（カテゴリ情報付き）
+const products = [
+    { name: "シンプルデスクオーガナイザー", category: "デスク周り" },
+    { name: "アロマディフューザー（ウッド）", category: "インテリア・雑貨" },
+    { name: "ミニマルウォールクロック", category: "インテリア・雑貨" },
+    { name: "陶器フラワーベース", category: "インテリア・雑貨" },
+    { name: "木製コースター（四枚セット）", category: "インテリア・雑貨" },
+    { name: "コットンブランケット", category: "家具・寝具" },
+    { name: "リネンクッションカバー", category: "家具・寝具" },
+    { name: "ガラス保存容器セット", category: "キッチン用品" },
+    { name: "ステンレスタンブラー", category: "キッチン用品" },
+    { name: "キャンバストートバッグ", category: "バッグ・トラベル" }
+];
+
+// 検索・カテゴリでフィルター
+function renderProducts() {
+    const keyword = document.getElementById("search-input").value.trim();
+    const selectedCategory = document.getElementById("category-select").value;
+    const container = document.getElementById("products-container");
+
+    // 一旦クリア
+    container.innerHTML = "";
+
+    const filtered = products.filter(p => {
+        const matchKeyword = keyword === "" || p.name.includes(keyword);
+        const matchCategory = selectedCategory === "" || p.category === selectedCategory;
+        return matchKeyword && matchCategory;
+    });
+
+    // 該当商品を表示（簡易的な例）
+    for (const p of filtered) {
+        const div = document.createElement("div");
+        div.className = "col";
+        div.innerHTML = `<div class="card p-3"><h5>${p.name}</h5><p>${p.category}</p></div>`;
+        container.appendChild(div);
+    }
+}
+
+// 検索ボタン、カテゴリ変更時に実行
+const searchButton = document.getElementById("search-button");
+if (searchButton) {
+  searchButton.addEventListener("click", filterProducts);
+}
+
+const categorySelect = document.getElementById("category-select");
+if (categorySelect) {
+  categorySelect.addEventListener("click", filterProducts);
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOMContentLoaded triggered");
+
+  // ログインページのフォーム処理
+  const loginForm = document.querySelector('#login-form');
+  if (loginForm) {
+    console.log("ログインフォームあり → イベント登録");
+
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = this.email.value;
+      const password = this.password.value;
+
+      fetch('/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include', 
+        body: JSON.stringify({ email, password })
+      })
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            throw new Error('メールアドレスまたはパスワードが違います');
+          }
+        })
+        .then(data => {
+          console.log('ログイン成功:', data);
+          window.location.href = 'mypage.html';
+        })
+        .catch(err => {
+          alert(err.message);
+        });
+    });
+  } else {
+    console.log("ログインフォームなし → スキップ");
+  }
+
+  // マイページ表示処理
+  const nameElem = document.getElementById('user-name');
+  const emailElem = document.getElementById('user-email');
+  const addressElem = document.getElementById('user-address');
+
+  if (nameElem && emailElem && addressElem) {
+    console.log("マイページと判定 → fetch実行");
+
+    fetch('/api/user/mypage', {
+      credentials: 'include'
+    })
+      .then(response => {
+        console.log("fetch実行:", response);
+        if (!response.ok) {
+          throw new Error('ログインしていません');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("取得したデータ:", data);
+        nameElem.textContent = data.name || "名前なし";
+        emailElem.textContent = data.email || "メールなし";
+        addressElem.textContent = data.address || "住所なし";
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  } else {
+    console.log("マイページではない → fetchしない");
+  }
+
+  // 商品検索ボタン処理
+  const searchButton = document.getElementById("search-button");
+  const categorySelect = document.getElementById("category-select");
+
+  if (typeof filterProducts === 'function') {
+    if (searchButton) {
+      searchButton.addEventListener("click", filterProducts);
+    }
+    if (categorySelect) {
+      categorySelect.addEventListener("change", filterProducts); 
+    }
+    
+    // 初期表示
+    if (searchButton || categorySelect) {
+      filterProducts();
+    }
+  } else {
+    console.log("filterProducts 関数未定義 → スキップ");
+  }
+});
+
+//　ログアウト
+document.getElementById('logoutButton').addEventListener('click', () => {
+  fetch('api/user/logout', {
+    method: 'POST',
+    credentials: 'include', 
+  })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '/ichiran.html'; 
+      } else {
+        alert('ログアウトに失敗しました。');
+      }
+    })
+    .catch(error => console.error('エラー:', error));
+});
+

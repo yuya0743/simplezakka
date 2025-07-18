@@ -4,8 +4,8 @@ import com.example.simplezakka.dto.product.ProductDetail;
 import com.example.simplezakka.dto.product.ProductListItem;
 import com.example.simplezakka.entity.Product;
 import com.example.simplezakka.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,6 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     
-    @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -37,7 +36,12 @@ public class ProductService {
                 product.getProductId(),
                 product.getName(),
                 product.getPrice(),
-                product.getImageUrl()
+                product.getImageUrl(),
+                product.getCategory(),
+                product.getMaterial(),
+                product.getStock(),
+                product.getDescription()     
+
         );
     }
     
@@ -45,10 +49,67 @@ public class ProductService {
         return new ProductDetail(
                 product.getProductId(),
                 product.getName(),
-                product.getPrice(),
                 product.getDescription(),
+                product.getPrice(),
                 product.getStock(),
-                product.getImageUrl()
+                product.getImageUrl(),
+                product.getIsRecommended(),
+                product.getCategory(),
+                product.getMaterial()
+
         );
     }
-}
+
+ // 以降追加 
+
+@Transactional 
+
+public ProductDetail createProduct(ProductDetail productDetail) { 
+    Product product = new Product(); 
+    product.setName(productDetail.getName()); 
+    product.setPrice(productDetail.getPrice()); 
+    product.setDescription(productDetail.getDescription()); 
+    product.setIsRecommended(productDetail.getIsRecommended()); 
+    product.setStock(productDetail.getStock()); 
+    product.setImageUrl(productDetail.getImageUrl()); 
+    product.setCategory(productDetail.getCategory()); 
+    product.setMaterial(productDetail.getMaterial()); 
+    
+    Product savedProduct = productRepository.save(product); 
+    return convertToDetail(savedProduct); 
+} 
+
+ 
+
+@Transactional 
+public ProductDetail updateProduct(Integer productId, ProductDetail productDetail) { 
+    Optional<Product> productOpt = productRepository.findById(productId); 
+    if (productOpt.isEmpty()) { 
+        return null; 
+    } 
+    
+    Product product = productOpt.get(); 
+    product.setName(productDetail.getName()); 
+    product.setPrice(productDetail.getPrice()); 
+    product.setDescription(productDetail.getDescription()); 
+    product.setIsRecommended(productDetail.getIsRecommended()); 
+    product.setStock(productDetail.getStock()); 
+    product.setImageUrl(productDetail.getImageUrl()); 
+    product.setCategory(productDetail.getCategory()); 
+    product.setMaterial(productDetail.getMaterial()); 
+    
+    Product updatedProduct = productRepository.save(product); 
+    return convertToDetail(updatedProduct); 
+} 
+
+ 
+
+@Transactional 
+public boolean deleteProduct(Integer productId) { 
+    if (!productRepository.existsById(productId)) { 
+        return false; 
+    } 
+    productRepository.deleteById(productId); 
+    return true; 
+} 
+}    

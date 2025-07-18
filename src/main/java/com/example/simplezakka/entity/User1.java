@@ -3,34 +3,32 @@ package com.example.simplezakka.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
+
+
 @Entity
-@Table(name = "products")
+@Table(name = "Users")
 @Data
 @NoArgsConstructor
-public class Product {
+public class User1{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer productId;
+    @Column(name = "user_id") 
+    private Integer UserId;
     
     @Column(nullable = false)
     private String name;
     
-    @Column(length = 300)
-    private String description;
+    @Column(nullable = false)
+    private String email;
     
     @Column(nullable = false)
-    private Integer price;
+    private String address;
     
     @Column(nullable = false)
-    private Integer stock;
-    
-    private String imageUrl;
-    
-    private Boolean isRecommended;
+    private String password;
     
     private LocalDateTime createdAt;
     
@@ -46,4 +44,9 @@ public class Product {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+
+    
+    
+    
 }
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>新規商品登録 | Spring-Shopsite</title>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <p th:text="${message}">新規商品登録</p>
+  <div class="form-container">
+    <form id="registerForm">
+      商品名：<input type="text" id="name" required>
+      <br/>
+
+      説明 ：<input type="text" id="description">
+      <br/>
+
+      価格：<input type="number" id="price" required>
+      <br/>
+
+      在庫：<input type="number" id="stock" required>
+      <br/>
+
+      イメージURL：<input type="url" id="imageUrl">
+      <br/>
+
+      おすすめ：
+      <select id="isRecommended">
+        <option value="">選択してください</option>
+        <option value="true">する</option>
+        <option value="false">しない</option>
+      </select>
+
+      <br/>
+
+      カテゴリ：
+      <select id="category">
+        <option value="">カテゴリ選択</option>
+        <option value="デスク周り">デスク周り</option>
+        <option value="インテリア・雑貨">インテリア・雑貨</option>
+        <option value="家具・寝具">家具・寝具</option>
+        <option value="キッチン用品">キッチン用品</option>
+        <option value="バッグ・トラベル">バッグ・トラベル</option>
+      </select>
+      
+      <br/>
+
+      素材：<input type="text" id="material">
+    
+      <br/>
+      
+      <input type="submit" value="登録"/>
+      
+
+    
+    <div id="errorMsg" style="color:red;margin-bottom:8px;"></div>
+
+  <script>
+    document.getElementById('registerForm').onsubmit = function(e) {
+  e.preventDefault();
+  const data = {
+    name: document.getElementById('name').value,
+    description: document.getElementById('description').value,
+    price: Number(document.getElementById('price').value),
+    stock: Number(document.getElementById('stock').value),
+    imageUrl: document.getElementById('imageUrl').value,
+    isRecommended: document.getElementById('isRecommended').value === "true",
+    category: document.getElementById('category').value,
+    material: document.getElementById('material').value
+  };
+
+  document.getElementById('errorMsg').textContent = "";
+
+  fetch('/api/products', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+  .then(async res => {
+    if (!res.ok) {
+      const errorData = await res.json();
+      // バリデーションエラー（400）の場合は複数エラーをまとめて表示
+      if (res.status === 400 && typeof errorData === "object") {
+        throw new Error(
+          Object.entries(errorData)
+            .map(([field, msg]) => `${field}: ${msg}`)
+            .join('\n')
+        );
+      } else {
+        throw new Error(errorData.message || "登録に失敗しました");
+      }
+    }
+    return res.json();
+  })
+  .then(() => {
+    alert("商品を登録しました！");
+    window.location.href = "a-top.html";
+  })
+  .catch(err => {
+    document.getElementById('errorMsg').textContent = err.message;
+  });
+};
+
+</script>
+</body>
+</html>
