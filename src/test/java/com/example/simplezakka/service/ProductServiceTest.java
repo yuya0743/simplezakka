@@ -24,6 +24,39 @@ import static org.mockito.Mockito.*;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.simplezakka.entity.Product;
+import com.example.simplezakka.dto.product.ProductDetail;
+import com.example.simplezakka.service.ProductService;
+
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.simplezakka.entity.Product;
+import com.example.simplezakka.dto.product.ProductDetail;
+import com.example.simplezakka.service.ProductService;
+
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.simplezakka.entity.Product;
+import com.example.simplezakka.dto.product.ProductListItem;
+import com.example.simplezakka.service.ProductService;
+
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.simplezakka.entity.Product;
+import com.example.simplezakka.dto.product.ProductListItem;
+import com.example.simplezakka.service.ProductService;
+
+import org.junit.jupiter.api.Test;
+
+
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
 
@@ -530,5 +563,128 @@ void deleteProduct_WhenDeleteFails_ShouldHandleOrReturnFalse() {
     verifyNoMoreInteractions(productRepository);
 }
 
+    // 25行目
+    @Test
+    void convertToDetail_ShouldConvertAllFields() {
+        // Arrange
+        Product product = new Product();
+        product.setProductId(1);
+        product.setName("商品A");
+        product.setDescription("説明A");
+        product.setPrice(1000);
+        product.setStock(5);
+        product.setImageUrl("/img/a.png");
+        product.setIsRecommended(true);
+        product.setCategory("キッチン");
+        product.setMaterial("木");
 
+        ProductService service = new ProductService(null); // Repository不要のためnull
+
+        // Act
+        ProductDetail detail = service.convertToDetail(product);
+
+        // Assert
+        assertThat(detail.getProductId()).isEqualTo(product.getProductId());
+        assertThat(detail.getName()).isEqualTo(product.getName());
+        assertThat(detail.getDescription()).isEqualTo(product.getDescription());
+        assertThat(detail.getPrice()).isEqualTo(product.getPrice());
+        assertThat(detail.getStock()).isEqualTo(product.getStock());
+        assertThat(detail.getImageUrl()).isEqualTo(product.getImageUrl());
+        assertThat(detail.getIsRecommended()).isEqualTo(product.getIsRecommended());
+        assertThat(detail.getCategory()).isEqualTo(product.getCategory());
+        assertThat(detail.getMaterial()).isEqualTo(product.getMaterial());
+    }
+
+    // 27行目
+    @Test
+    void convertToDetail_ShouldConvertNullFields() {
+        // Arrange
+        Product product = new Product();
+        product.setProductId(2);
+        product.setName("nullテスト商品");
+        product.setDescription(null);         // null項目
+        product.setPrice(2000);
+        product.setStock(3);
+        product.setImageUrl(null);            // null項目
+        product.setIsRecommended(null);       // null項目
+        product.setCategory("雑貨");
+        product.setMaterial("プラスチック");
+
+        ProductService service = new ProductService(null); // Repository不要
+
+        // Act
+        ProductDetail detail = service.convertToDetail(product);
+
+        // Assert
+        assertThat(detail.getProductId()).isEqualTo(product.getProductId());
+        assertThat(detail.getName()).isEqualTo(product.getName());
+        assertThat(detail.getDescription()).isNull();       // null項目の確認
+        assertThat(detail.getPrice()).isEqualTo(product.getPrice());
+        assertThat(detail.getStock()).isEqualTo(product.getStock());
+        assertThat(detail.getImageUrl()).isNull();          // null項目の確認
+        assertThat(detail.getIsRecommended()).isNull();     // null項目の確認
+        assertThat(detail.getCategory()).isEqualTo(product.getCategory());
+        assertThat(detail.getMaterial()).isEqualTo(product.getMaterial());
+    }
+
+    // 28行目
+    @Test
+    void convertToListItem_ShouldConvertAllFields() {
+        // Arrange
+        Product product = new Product();
+        product.setProductId(10);
+        product.setName("リスト商品");
+        product.setPrice(500);
+        product.setImageUrl("/img/list.png");
+        product.setCategory("日用品");
+        product.setMaterial("金属");
+        product.setStock(12);
+        product.setDescription("リストアイテム用");
+
+        ProductService service = new ProductService(null); // Repositoryは不要
+
+        // Act
+        ProductListItem item = service.convertToListItem(product);
+
+        // Assert
+        assertThat(item.getProductId()).isEqualTo(product.getProductId());
+        assertThat(item.getName()).isEqualTo(product.getName());
+        assertThat(item.getPrice()).isEqualTo(product.getPrice());
+        assertThat(item.getImageUrl()).isEqualTo(product.getImageUrl());
+        assertThat(item.getCategory()).isEqualTo(product.getCategory());
+        assertThat(item.getMaterial()).isEqualTo(product.getMaterial());
+        assertThat(item.getStock()).isEqualTo(product.getStock());
+        assertThat(item.getDescription()).isEqualTo(product.getDescription());
+    }
+
+    @Test
+    void convertToListItem_ShouldConvertNullFields() {
+        // Arrange
+        Product product = new Product();
+        product.setProductId(11);
+        product.setName("null項目テスト商品");
+        product.setPrice(250);
+        product.setImageUrl(null);        // null項目
+        product.setCategory("文房具");
+        product.setMaterial("紙");
+        product.setStock(2);
+        product.setDescription(null);     // null項目
+
+        ProductService service = new ProductService(null); // Repository不要
+
+        // Act
+        ProductListItem item = service.convertToListItem(product);
+
+        // Assert
+        assertThat(item.getProductId()).isEqualTo(product.getProductId());
+        assertThat(item.getName()).isEqualTo(product.getName());
+        assertThat(item.getPrice()).isEqualTo(product.getPrice());
+        assertThat(item.getImageUrl()).isNull();             // null項目
+        assertThat(item.getCategory()).isEqualTo(product.getCategory());
+        assertThat(item.getMaterial()).isEqualTo(product.getMaterial());
+        assertThat(item.getStock()).isEqualTo(product.getStock());
+        assertThat(item.getDescription()).isNull();          // null項目
+    }
 }
+
+

@@ -150,7 +150,7 @@ class ProductControllerTest {
             verifyNoMoreInteractions(productService);
         }
 
-         @Test
+        @Test
         @DisplayName("存在するproductIdで、一部フィールドがnullの商品の場合、nullを含む商品詳細を200 OKで返す")
         void getProductById_WhenProductExistsWithNullFields_ShouldReturnProductDetailWithNulls() throws Exception {
             // Arrange (setUpのデフォルトモックを使用 - ID:3)
