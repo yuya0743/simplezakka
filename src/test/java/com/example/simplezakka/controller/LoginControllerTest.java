@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import com.example.simplezakka.dto.Login.Logininfo;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.Null;
+
 import com.example.simplezakka.service.CartService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
@@ -72,6 +74,7 @@ class LoginControllerTest {
  
 @Nested
 public class GetMypageTest {
+    @Nested
     @DisplayName("GET /api/mypage")
     class GetMypageSuccessTests {
         @Test
@@ -80,9 +83,11 @@ public class GetMypageTest {
             // Arrange
             MockHttpSession mockSession = new MockHttpSession();
             
-            String email = (String) mockSession.getAttribute("userEmail");
+            mockSession.setAttribute("userEmail", "success@sample.com");
             
             when(mockSession.getAttribute("userEmail")).thenReturn("success@sample.com");
+             when(authService.getUserInfoByEmail("success@sample.com")).thenReturn(successLogininfo);
+            when(authService.getUserInfoByEmail("success@sample.com")).thenReturn(successLogininfo);
             
             // Act & Assert
            mockMvc.perform(get("/api/mypage")
@@ -101,10 +106,14 @@ public class GetMypageTest {
         void getMypage_WhenEmailIsNull_ShouldReturnHTTPStatusNOT_FOUND() throws Exception {
             // Arrange
             MockHttpSession mockSession = new MockHttpSession();
-            
-            String email = isNull();
-            
+            mockSession.setAttribute("userEmail", "success@sample.com");
             when(mockSession.getAttribute("userEmail")).thenReturn("success@sample.com");
+
+            
+            
+            
+            when(mockSession.getAttribute("userEmail")).thenReturn("fail@sample.com");
+            when(authService.getUserInfoByEmail("fail@sample.com")).thenReturn(failLogininfo);
             
             // Act & Assert
            mockMvc.perform(get("/api/mypage")
@@ -117,14 +126,15 @@ public class GetMypageTest {
         }
 
          @Test
-        @DisplayName("セッションにカートが存在する場合、カート情報を200 OKで返す")
+        @DisplayName("emailがからの時エラーを返す")
         void getMypage_WhenEmailIsNull_ShouldReturnHTTPStatusUNAUTHORIZED() throws Exception {
             // Arrange
             MockHttpSession mockSession = new MockHttpSession();
             
             String email = (String) mockSession.getAttribute("userEmail");
             
-            when(mockSession.getAttribute("userEmail")).thenReturn("fail@sample.com");
+           mockSession.setAttribute("userEmail", "success@sample.com");
+            when(mockSession.getAttribute("userEmail")).thenReturn(null);
             
             // Act & Assert
            mockMvc.perform(get("/api/mypage")
