@@ -59,7 +59,7 @@ class AuthServiceTest {
     @Test
     @DisplayName("Login: ユーザーが存在しない場合、falseを返す")
     void Login_WhenUserNotExist_ShouldReturnFalse() {
-        when(authRepository.findByEmail("user@email.com")).thenReturn(Optional.of(existingUser));
+        when(authRepository.findByEmail("unknown@email.com")).thenReturn(Optional.empty());
 
         boolean result = authService.login("unknown@email.com", "password");
 
@@ -72,7 +72,7 @@ class AuthServiceTest {
         when(authRepository.findByEmail("user@email.com"))
             .thenReturn(Optional.of(existingUser));
 
-        Logininfo result = authService.getUserInfoByEmail("user@emali.com");
+        Logininfo result = authService.getUserInfoByEmail("user@email.com");
 
         assertThat(result.getEmail()).isEqualTo("user@email.com");
         assertThat(result.getPassword()).isEqualTo("password");
@@ -86,7 +86,7 @@ class AuthServiceTest {
         when(authRepository.findByEmail("unknown@email.com"))
             .thenReturn(Optional.empty());
             
-        Logininfo result = authService.getUserInfoByEmail("unknown@emali.com");
+        Logininfo result = authService.getUserInfoByEmail("unknown@email.com");
 
         assertThat(result).isNull();
     }
