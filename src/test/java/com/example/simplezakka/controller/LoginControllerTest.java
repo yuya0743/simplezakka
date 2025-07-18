@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
-@WebMvcTest(LogInController.class) // CartController とその依存関係（バリデーションなど）をテスト
+@WebMvcTest(LogInController.class) // LogInControllerのテスト
 class LoginControllerTest {
 
     @Autowired
@@ -70,8 +70,8 @@ class LoginControllerTest {
 
 
  
-
-public class GetMypageTest {@Nested
+@Nested
+public class GetMypageTest {
     @DisplayName("GET /api/mypage")
     class GetMypageSuccessTests {
         @Test
@@ -85,7 +85,7 @@ public class GetMypageTest {@Nested
             when(mockSession.getAttribute("userEmail")).thenReturn("success@sample.com");
             
             // Act & Assert
-           mockMvc.perform(get("/api/user/mypage")
+           mockMvc.perform(get("/api/mypage")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
@@ -107,7 +107,7 @@ public class GetMypageTest {@Nested
             when(mockSession.getAttribute("userEmail")).thenReturn("success@sample.com");
             
             // Act & Assert
-           mockMvc.perform(get("/api/user/mypage")
+           mockMvc.perform(get("/api/mypage")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest())
@@ -127,7 +127,7 @@ public class GetMypageTest {@Nested
             when(mockSession.getAttribute("userEmail")).thenReturn("fail@sample.com");
             
             // Act & Assert
-           mockMvc.perform(get("/api/user/mypage")
+           mockMvc.perform(get("/api/mypage")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isBadRequest())
@@ -143,8 +143,9 @@ public class GetMypageTest {@Nested
     
     } // End of GetMypageTest
     
-}
-public class LoginTest{@Nested
+
+@Nested
+public class LoginTest{
     @DisplayName("GET /api/login")
     class GetLoginSuccessTests{
     @Test
@@ -178,6 +179,7 @@ public class LoginTest{@Nested
             mockMvc.perform(get("/api/login")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
+                            
                     .andExpect(status().isBadRequest())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                    
@@ -186,7 +188,8 @@ public class LoginTest{@Nested
                     
      }
     }
- public class LogoutTest   {@Nested
+    @Nested
+ public class LogoutTest   {
     @DisplayName("GET /api/logout")
     class LogoutTests {
         @Test
@@ -209,5 +212,6 @@ public class LoginTest{@Nested
         }
 
     }
+}
 }
 }
