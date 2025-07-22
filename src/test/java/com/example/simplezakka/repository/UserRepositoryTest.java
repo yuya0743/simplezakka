@@ -62,5 +62,15 @@ public class UserRepositoryTest {
         assertThat(foundUser.getUserId()).isNotNull();
         assertThat(foundUser.getName()).isEqualTo(user.getName()); 
         assertThat(foundUser.getEmail()).isEqualTo(user.getEmail());
+
+        // User1 foundUser を取得した後に追加
+assertThat(foundUser.getCreatedAt()).isNotNull(); // createdAtがnullではないことを確認
+assertThat(foundUser.getUpdatedAt()).isNotNull(); // updatedAtがnullではないことを確認
+
+// createdAt と updatedAt の値が論理的に正しいことを検証（例：createdAt <= updatedAt）
+assertThat(foundUser.getCreatedAt()).isBeforeOrEqualTo(foundUser.getUpdatedAt());
+
+// 必要であれば、現在時刻との近接性を検証（ただし、テストの実行時間に依存するため注意が必要）
+// assertThat(foundUser.getCreatedAt()).isCloseTo(LocalDateTime.now(), within(Duration.ofSeconds(5)));
     }
 }

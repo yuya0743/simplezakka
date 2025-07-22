@@ -52,7 +52,6 @@ class UserControllerTest {
         @Test
         @DisplayName("有効なユーザー情報で登録が成功すること")
         void registerUser_Success() throws Exception {
-            doNothing().when(userService).registerUser(anyString(), anyString(), anyString(), anyString());
 
             mockMvc.perform(post("/api/users")
                             .contentType(MediaType.APPLICATION_JSON)
