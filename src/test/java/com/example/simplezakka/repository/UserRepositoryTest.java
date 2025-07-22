@@ -25,13 +25,8 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @BeforeEach
-    void setUp() {
-        // setUpでもcreateSampleUserを使ってユーザーを準備
-        User1 user = createSampleUser("山下", "0000", "yama@gmail.com", "東京都");
-        entityManager.persist(user); // データベースに永続化
-        entityManager.flush(); // 即座にDBに反映
-    }
+  
+
 
     /**
      * テスト用のUserオブジェクトを作成するヘルパーメソッド
