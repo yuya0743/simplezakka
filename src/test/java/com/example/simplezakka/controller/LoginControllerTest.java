@@ -9,8 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 import com.example.simplezakka.dto.Login.Logininfo;
+import org.mockito.exceptions.misusing.MissingMethodInvocationException;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.Null;
+
 import com.example.simplezakka.service.CartService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
@@ -68,24 +71,27 @@ class LoginControllerTest {
     // 他のメソッドはテストごとに when で設定
     }
 
-
  
 @Nested
 public class GetMypageTest {
+    @Nested
     @DisplayName("GET /api/mypage")
     class GetMypageSuccessTests {
         @Test
         @DisplayName("emailで登録されているユーザが存在する場合、登録情報を返す")
         void getmypage_WhenUserExists_ShouldReturnLoginInfotWithStatusOk() throws Exception {
             // Arrange
-            MockHttpSession mockSession = new MockHttpSession();
+            MockHttpSession mockSession = mock(MockHttpSession.class);
+            mockSession.setAttribute("userEmail", "success@sample.com");
+           when(mockSession.getAttribute("userEmail")).thenReturn( "success@sample.com");
             
-            String email = (String) mockSession.getAttribute("userEmail");
+             
             
-            when(mockSession.getAttribute("userEmail")).thenReturn("success@sample.com");
+             when(authService.getUserInfoByEmail("success@sample.com")).thenReturn(successLogininfo);
+           
             
             // Act & Assert
-           mockMvc.perform(get("/api/mypage")
+           mockMvc.perform(get("/api/user/mypage")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
@@ -100,43 +106,47 @@ public class GetMypageTest {
         @Test
         void getMypage_WhenEmailIsNull_ShouldReturnHTTPStatusNOT_FOUND() throws Exception {
             // Arrange
-            MockHttpSession mockSession = new MockHttpSession();
+            MockHttpSession mockSession = mock(MockHttpSession.class);
+            mockSession.setAttribute("userEmail", "fail@sample.com");
+           when(mockSession.getAttribute("userEmail")).thenReturn("fail@sample.com" );
             
-            String email = isNull();
+             
             
-            when(mockSession.getAttribute("userEmail")).thenReturn("success@sample.com");
-            
+             when(authService.getUserInfoByEmail("fail@sample.com")).thenReturn(null);
+
             // Act & Assert
-           mockMvc.perform(get("/api/mypage")
+           mockMvc.perform(get("/api/user/mypage")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isBadRequest())
+                    .andExpect(status().isNotFound())
+                
                     ;
 
          
         }
 
          @Test
-        @DisplayName("セッションにカートが存在する場合、カート情報を200 OKで返す")
+        @DisplayName("emailがからの時エラーを返す")
         void getMypage_WhenEmailIsNull_ShouldReturnHTTPStatusUNAUTHORIZED() throws Exception {
             // Arrange
-            MockHttpSession mockSession = new MockHttpSession();
+
+        
+                MockHttpSession mockSession = mock(MockHttpSession.class);
+            mockSession.setAttribute("userEmail", "success@sample.com");
+        when(mockSession.getAttribute("userEmail")).thenReturn(null);
             
-            String email = (String) mockSession.getAttribute("userEmail");
+             
             
-            when(mockSession.getAttribute("userEmail")).thenReturn("fail@sample.com");
+             when(authService.getUserInfoByEmail("success@sample.com")).thenReturn(successLogininfo);
+            
             
             // Act & Assert
-           mockMvc.perform(get("/api/mypage")
+           mockMvc.perform(get("/api/user/mypage")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isBadRequest())
+                    .andExpect(status().isUnauthorized());
                     
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(jsonPath("$.name", is(failLogininfo.getName())))
-                    .andExpect(jsonPath("$.email", is(failLogininfo.getEmail())))
-                    .andExpect(jsonPath("$.password", is(failLogininfo.getPassword())))
-                    .andExpect(jsonPath("$.address", is(failLogininfo.getAddress())));
+                    
 
          
         }
@@ -146,17 +156,22 @@ public class GetMypageTest {
 
 @Nested
 public class LoginTest{
-    @DisplayName("GET /api/login")
+    @Nested
+    @DisplayName("POST /api/user/login")
     class GetLoginSuccessTests{
     @Test
         @DisplayName("emailで登録されているユーザが存在する場合、ログイン成功を返す")
         void postlogin_WhenLoginExists_ShouldReturnLoginWithStatusOk() throws Exception {
-            MockHttpSession mockSession = new MockHttpSession();
+            MockHttpSession mockSession = mock(MockHttpSession.class);
             Logininfo loginInfo = successLogininfo;
+            when(authService.login(loginInfo.getEmail(), loginInfo.getPassword())).thenReturn(true);
+            
            
            
-            mockMvc.perform(get("/api/login")
+            mockMvc.perform(post("/api/user/login")
                             .session(mockSession)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(successLogininfo))
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -164,7 +179,7 @@ public class LoginTest{
                     .andExpect(jsonPath("$.email", is(successLogininfo.getEmail())))
                     .andExpect(jsonPath("$.password", is(successLogininfo.getPassword())));
                     
-
+        verify(mockSession, times(1)).setAttribute("userEmail", successLogininfo.getEmail());
 
      }
      @Test
@@ -174,29 +189,33 @@ public class LoginTest{
         void postlogin_WhenLoginNotExists_ShouldReturnLoginWithStatusUNAUTHORIZED() throws Exception {
             MockHttpSession mockSession = new MockHttpSession();
             Logininfo loginInfo = failLogininfo;
+            when(authService.login(loginInfo.getEmail(), loginInfo.getPassword())).thenReturn(false);
            
            
-            mockMvc.perform(get("/api/login")
+            mockMvc.perform(post("/api/login")
                             .session(mockSession)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(successLogininfo))
                             .accept(MediaType.APPLICATION_JSON))
                             
-                    .andExpect(status().isBadRequest())
-                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                    
+                    
                    
-                    .andExpect(jsonPath("$.email", is(failLogininfo.getEmail())))
-                    .andExpect(jsonPath("$.password", is(failLogininfo.getPassword())));
+                   
+                    .andExpect(status().isNotFound());
                     
      }
     }
     @Nested
  public class LogoutTest   {
-    @DisplayName("GET /api/logout")
+    @Nested
+    @DisplayName("POST /api/logout")
     class LogoutTests {
         @Test
         @DisplayName("ログアウト成功時、セッションを無効化し、200 OKを返す")
         void logout_WithActiveSession_ShouldInvalidateSessionAndReturnOk() throws Exception {
             MockHttpSession mockSession = new MockHttpSession();
-             mockMvc.perform(get("/api/logout")
+             mockMvc.perform(post("/api/user/logout")
                             .session(mockSession)
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
@@ -215,3 +234,5 @@ public class LoginTest{
 }
 }
 }
+
+
