@@ -45,32 +45,52 @@ class UserServiceTest {
     private UserInfo userInfo;
 
     @BeforeEach
-    void setUp(String name, String password, String email, String address){
+    void setUp(){
         session = new MockHttpSession();
+       
+        // --- Mockito leninent 設定 ---
+        lenient().when(userRepository.save(any(User1.class))).thenAnswer(invocation -> {
+        User1 userToSave = invocation.getArgument(0);
+        if (userToSave.getUserId() == null) {
+                userToSave.setUserId(123);
+            }
+            return userToSave;
+        });
+    }
 
-        // 商品データ準備
+     // Userデータ準備
+     private void registerUser(String name, String password, String email, String address) {
         User1 user = new User1(); 
         user.setName(name);
         user.setPassword(password);
         user.setEmail(email);
         user.setAddress(address);
         userRepository.save(user);
-    }
+     }
 
     @Test
     @DisplayName("ユーザー登録が成功すること")
     void register_WhenSucess() {
         // Arrange
-               lenient().when(userRepository.save(any(User1.class))).thenAnswer(invocation -> {
-            User1 userToSave = invocation.getArgument(0);
-            if (userToSave.getUserId() == null) {
-                userToSave.setUserId(123);
-            }
-            // Orderエンティティの addOrderDetail を使う場合、通常この関連設定は不要
-            // orderToSave.getOrderDetails().forEach(detail ->
-            // detail.setOrder(orderToSave));
-            return userToSave;
-        });
+        String name = "山下";
+        String password = "0000";
+        String email = "a@a";
+        String address = "東京都";
+        
+        // Act
+        registerUser( name, password,email, address);
+        // Assert
+        ArgumentCaptor<User1> userCaptor = ArgumentCaptor.forClass(User1.class);
+        verify(userRepository, times(1)).save(userCaptor.capture());
+        User1 savedUser = userCaptor.getValue();
+        assertThat(savedUser.getName()).isEqualTo(name);
+        assertThat(savedUser.getPassword()).isEqualTo(password);
+        assertThat(savedUser.getEmail()).isEqualTo(email);
+        assertThat(savedUser.getAddress()).isEqualTo(address);
+        assertThat(savedUser.getUserId()).isNotNull();
+
+
+           
 
     }
 
