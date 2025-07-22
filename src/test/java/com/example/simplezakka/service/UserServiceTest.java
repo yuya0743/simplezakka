@@ -53,7 +53,7 @@ class UserServiceTest {
         });
     }
  
-     // Userデータ準備
+     /*  Userデータ準備
      private void registerUser(String name, String password, String email, String address) {
         User1 user = new User1();
         user.setName(name);
@@ -62,7 +62,8 @@ class UserServiceTest {
         user.setAddress(address);
         userRepository.save(user);
      }
- 
+    */
+
     @Test
     @DisplayName("ユーザー登録が成功すること")
     void register_WhenSucess() {
@@ -84,7 +85,6 @@ class UserServiceTest {
         assertThat(savedUser.getEmail()).isEqualTo(email);
         assertThat(savedUser.getAddress()).isEqualTo(address);
         assertThat(savedUser.getUserId()).isNotNull();
- 
  
            
     }
