@@ -19,7 +19,7 @@ public class Product {
     @Column(nullable = false)
     private String name;
     
-    @Column(length = 1000)
+    @Column(length = 300)
     private String description;
     
     @Column(nullable = false)
@@ -28,10 +28,6 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
     
-    @Column(nullable = false)
-
-
-
     private String imageUrl;
     
     private Boolean isRecommended;
@@ -49,7 +45,6 @@ public class Product {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
-    
     
     @PreUpdate
     protected void onUpdate() {

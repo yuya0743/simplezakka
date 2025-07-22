@@ -1,5 +1,6 @@
 package com.example.simplezakka.controller;
 
+import com.example.simplezakka.dto.User.UserInfo;
 import com.example.simplezakka.dto.User.UserRequest;
 import com.example.simplezakka.dto.User.UserResponse;
 import com.example.simplezakka.entity.User1;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -29,11 +30,12 @@ public class UserController {
 
     }
     
-   @PostMapping(value = "/api/users", consumes = "application/json")
+   @PostMapping(value = "/users", consumes = "application/json")
     @ResponseBody
-    public String registerUserJson(@RequestBody User1 user) {
-    // JSONデータを受け取り、ユーザーを登録する処理
-    userService.registerUser(user.getName(), user.getPassword(), user.getEmail(), user.getAddress());
-    return "{\"message\":\"登録が完了しました！\"}";
-}
+    public ResponseEntity<UserInfo>registerUserJson(@RequestBody @Valid UserInfo user, HttpSession session) {
+        userService.registerUser(user.getName(), user.getPassword(), user.getEmail(), user.getAddress());
+        session.setAttribute("userinfo", user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
 }
