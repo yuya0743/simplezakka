@@ -39,14 +39,9 @@ class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    private HttpSession session;
-    private User1 user;
-    private UserRequest userRequest;
-    private UserInfo userInfo;
 
     @BeforeEach
     void setUp(){
-        session = new MockHttpSession();
        
         // --- Mockito leninent 設定 ---
         lenient().when(userRepository.save(any(User1.class))).thenAnswer(invocation -> {
@@ -72,13 +67,14 @@ class UserServiceTest {
     @DisplayName("ユーザー登録が成功すること")
     void register_WhenSucess() {
         // Arrange
-        String name = "山下";
+
+        String name = "山田太郎";
         String password = "0000";
         String email = "a@a";
         String address = "東京都";
         
         // Act
-        registerUser( name, password,email, address);
+        registerUser(name, password,email, address);
         // Assert
         ArgumentCaptor<User1> userCaptor = ArgumentCaptor.forClass(User1.class);
         verify(userRepository, times(1)).save(userCaptor.capture());
