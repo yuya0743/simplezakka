@@ -3,6 +3,7 @@ package com.example.simplezakka.service;
 import com.example.simplezakka.dto.User.UserInfo;
 import com.example.simplezakka.dto.User.UserRequest;
 import com.example.simplezakka.dto.User.UserResponse;
+import com.example.simplezakka.entity.Order;
 import com.example.simplezakka.entity.User1;
 import com.example.simplezakka.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -30,7 +31,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class OrderServiceTest {
+class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
@@ -38,21 +39,39 @@ class OrderServiceTest {
     @InjectMocks
     private UserService userService;
 
-     private HttpSession session;
+    private HttpSession session;
     private User1 user;
     private UserRequest userRequest;
     private UserInfo userInfo;
 
     @BeforeEach
-    void setUp() {
+    void setUp(String name, String password, String email, String address){
         session = new MockHttpSession();
 
         // 商品データ準備
         User1 user = new User1(); 
-        user.setName("山下");
-        user.setPassword("0000");
-        user.setEmail("yama@gmail.com");
-        user.setAddress("東京都");
-public class UserServiceTest {
-    
+        user.setName(name);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setAddress(address);
+        userRepository.save(user);
+    }
+
+    @Test
+    @DisplayName("ユーザー登録が成功すること")
+    void register_WhenSucess() {
+        // Arrange
+               lenient().when(userRepository.save(any(User1.class))).thenAnswer(invocation -> {
+            User1 userToSave = invocation.getArgument(0);
+            if (userToSave.getUserId() == null) {
+                userToSave.setUserId(123);
+            }
+            // Orderエンティティの addOrderDetail を使う場合、通常この関連設定は不要
+            // orderToSave.getOrderDetails().forEach(detail ->
+            // detail.setOrder(orderToSave));
+            return userToSave;
+        });
+
+    }
+
 }
