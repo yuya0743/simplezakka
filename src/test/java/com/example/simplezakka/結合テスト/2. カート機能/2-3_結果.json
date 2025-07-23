@@ -1,0 +1,30 @@
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 06:33:05 GMT
+Connection: close
+
+{
+  "items": {
+    "1": {
+      "id": "1",
+      "productId": 1,
+      "name": "シンプルデスクオーガナイザー",
+      "price": 3500,
+      "imageUrl": "/images/desk-organizer.png",
+      "quantity": 1,
+      "subtotal": 3500
+    },
+    "2": {
+      "id": "2",
+      "productId": 2,
+      "name": "アロマディフューザー（ウッド）",
+      "price": 4200,
+      "imageUrl": "/images/aroma-diffuser.png",
+      "quantity": 1,
+      "subtotal": 4200
+    }
+  },
+  "totalQuantity": 2,
+  "totalPrice": 7700
+}

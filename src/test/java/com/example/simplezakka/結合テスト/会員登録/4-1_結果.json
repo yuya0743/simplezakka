@@ -1,0 +1,14 @@
+
+HTTP/1.1 201 
+Set-Cookie: JSESSIONID=8FB1B53CC423F100DE004BBAEC6DCE47; Path=/; HttpOnly
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 06:33:56 GMT
+Connection: close
+
+{
+  "name": "test",
+  "email": "test@mail.com",
+  "address": "Tokyo",
+  "password": "0000"
+}
