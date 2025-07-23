@@ -1,2 +1,2 @@
-### 1-6
-GET http://localhost:8080/api/products/11
+### 1-4
+GET http://localhost:8080/api/products/abc
