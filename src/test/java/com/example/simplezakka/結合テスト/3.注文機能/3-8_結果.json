@@ -1,0 +1,9 @@
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 08:28:05 GMT
+Connection: close
+
+{
+  "customerInfo.email": "有効なメールアドレスを入力してください"
+}

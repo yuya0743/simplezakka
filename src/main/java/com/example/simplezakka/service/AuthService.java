@@ -1,6 +1,6 @@
 package com.example.simplezakka.service;
 
-import com.example.simplezakka.dto.Login.Logininfo;
+import com.example.simplezakka.dto.Login.LoginInfo;
 import com.example.simplezakka.entity.User1;
 import com.example.simplezakka.repository.AuthRepository;
 import org.springframework.stereotype.Service;
@@ -21,13 +21,13 @@ public class AuthService {
         return userOptional.map(user -> user.getPassword().equals(password)).orElse(false);
     }
 
-    public Logininfo getUserInfoByEmail(String email) {
+    public LoginInfo getUserInfoByEmail(String email) {
         Optional<User1> userOpt = authRepository.findByEmail(email);
         return userOpt.map(this::convertToLogin).orElse(null);
     }
 
-    public Logininfo convertToLogin(User1 user) {
-        Logininfo info = new Logininfo();
+    public LoginInfo convertToLogin(User1 user) {
+        LoginInfo info = new LoginInfo();
         info.setName(user.getName());
         info.setEmail(user.getEmail());
         info.setPassword(user.getPassword());
