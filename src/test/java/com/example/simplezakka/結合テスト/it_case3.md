@@ -117,7 +117,7 @@
   - セッション: 上記前提条件のカート情報
 - 期待結果:
   1. HTTPステータスコードが `500 Internal Server Error` であること（`OrderService` 内で `RuntimeException` がスローされ、`GlobalExceptionHandler` で処理されるため）。
-  2. レスポンスボディにエラーメッセージ（例: "在庫不足または商品未存在: 商品A" を含むJSON）が返却されること。
+  2. レスポンスボディが空欄になること。
   3. DB状態変化: `orders`, `order_details`, `products` テーブルに変化がないこと（トランザクションがロールバックされる）。
   4. セッション状態変化: セッションの `cart` 属性がクリアされずに残っていること。
   5. `OrderService.placeOrder` が呼び出されるが、在庫確認のループ内で例外がスローされること。
