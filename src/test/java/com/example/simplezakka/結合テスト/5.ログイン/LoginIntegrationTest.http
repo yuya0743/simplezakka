@@ -1,0 +1,44 @@
+### 正常系
+### 5-1 登録済み会員が正しい情報でログインする
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "testpass"
+}
+
+
+### 5-2 ログイン後にマイページへアクセス
+GET http://localhost:8080/api/user/mypage
+Content-Type: application/json
+
+
+### 5-3 ログアウト処理
+POST http://localhost:8080/api/user/logout
+
+
+###　異常系
+### 5-4　存在しないメールアドレスでログイン
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "email": "unregistered@example.com",
+    "password": "somepass"
+}
+
+
+### 5-5 パスワードが間違っている場合
+POST http://localhost:8080/api/user/login
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "wrongpass"
+}
+
+
+### 5-6 ログインしていない状態でマイページにアクセス
+GET http://localhost:8080/api/user/mypage
+
