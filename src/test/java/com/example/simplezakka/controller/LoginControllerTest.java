@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-import com.example.simplezakka.dto.Login.Logininfo;
+import com.example.simplezakka.dto.Login.LoginInfo;
+
 import org.mockito.exceptions.misusing.MissingMethodInvocationException;
 
 import jakarta.servlet.http.HttpSession;
@@ -54,15 +55,20 @@ class LoginControllerTest {
     @MockBean // Service層のモック
     private AuthService authService;
 
-    private Logininfo successLogininfo;
-    private Logininfo failLogininfo;
+
+    private LoginInfo successLogininfo;
+    private LoginInfo failLogininfo;
+
     private MockHttpSession mockSession;
 
     @BeforeEach
     void setUp() {
         // --- テストデータ準備 ---
-        successLogininfo = new Logininfo("テスト太郎","success@sample.com","password","東京都新宿区1-1-1");
-        failLogininfo = new Logininfo("テスト花子","fail@sample.com","wrongpassword","東京都新宿区2-2-2");
+
+        
+        successLogininfo = new LoginInfo ("テスト太郎","success@sample.com","password","東京都新宿区1-1-1");
+        failLogininfo = new LoginInfo("テスト花子","fail@sample.com","wrongpassword","東京都新宿区2-2-2");
+
 
         lenient().when(authService.getUserInfoByEmail("success@sample.com")).thenReturn(successLogininfo);
         lenient().when(authService.getUserInfoByEmail("fail@sample.com")).thenReturn(failLogininfo);
@@ -163,7 +169,9 @@ public class LoginTest{
         @DisplayName("emailで登録されているユーザが存在する場合、ログイン成功を返す")
         void postlogin_WhenLoginExists_ShouldReturnLoginWithStatusOk() throws Exception {
             MockHttpSession mockSession = mock(MockHttpSession.class);
-            Logininfo loginInfo = successLogininfo;
+
+            LoginInfo loginInfo = successLogininfo;
+
             when(authService.login(loginInfo.getEmail(), loginInfo.getPassword())).thenReturn(true);
             
            
@@ -188,7 +196,9 @@ public class LoginTest{
          
         void postlogin_WhenLoginNotExists_ShouldReturnLoginWithStatusUNAUTHORIZED() throws Exception {
             MockHttpSession mockSession = new MockHttpSession();
-            Logininfo loginInfo = failLogininfo;
+
+            LoginInfo loginInfo = failLogininfo;
+
             when(authService.login(loginInfo.getEmail(), loginInfo.getPassword())).thenReturn(false);
            
            
@@ -210,7 +220,9 @@ public class LoginTest{
  public class LogoutTest   {
     @Nested
     @DisplayName("POST /api/logout")
-    class LogoutTests {
+
+    class LogoutTests {	
+
         @Test
         @DisplayName("ログアウト成功時、セッションを無効化し、200 OKを返す")
         void logout_WithActiveSession_ShouldInvalidateSessionAndReturnOk() throws Exception {
