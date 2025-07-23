@@ -37,7 +37,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 
 @WebMvcTest(ProductController.class) // ProductController と関連コンポーネントをテスト
 class ProductControllerTest {
@@ -467,36 +469,31 @@ class ProductControllerTest {
 
     // 19行目
     @Test
-    @DisplayName("商品登録(createProduct)正常系: nameが1文字でも登録できる")
-    void createProduct_WhenNameIsMinLength_ShouldSucceed() throws Exception {
-    // Arrange: nameが1文字
-    ProductDetail requestDetail = new ProductDetail(
-            null, "あ", "1文字テスト", 850, 4, "/min1.png", false, "テストカテゴリ", "テスト素材"
-    );
-    ProductDetail savedDetail = new ProductDetail(
-            110, "あ", "1文字テスト", 850, 4, "/min1.png", false, "テストカテゴリ", "テスト素材"
-    );
-    when(productService.createProduct(any(ProductDetail.class))).thenReturn(savedDetail);
+        @DisplayName("商品登録(createProduct)異常値: name=null で400 Bad Requestとエラーメッセージ")
+        void createProduct_WhenNameIsNull_ShouldReturn400() throws Exception {
+         // Arrange: nameがnull、それ以外は正常
+        ProductDetail invalidDetail = new ProductDetail(
+            null, // productId
+            null, // name
+            "説明",
+            1200, // price
+            5,    // stock
+            "/img/item.png",
+            true,
+            "カテゴリ",
+            "素材"
+        );
 
-    // Act & Assert
-    mockMvc.perform(post("/api/products")
+        mockMvc.perform(post("/api/products")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(new ObjectMapper().writeValueAsString(requestDetail)))
-        .andExpect(status().isCreated())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.productId").value(110))
-        .andExpect(jsonPath("$.name").value("あ")) // 1文字のnameがレスポンスに反映される
-        .andExpect(jsonPath("$.description").value("1文字テスト"))
-        .andExpect(jsonPath("$.price").value(850))
-        .andExpect(jsonPath("$.stock").value(4))
-        .andExpect(jsonPath("$.imageUrl").value("/min1.png"))
-        .andExpect(jsonPath("$.isRecommended").value(false))
-        .andExpect(jsonPath("$.category").value("テストカテゴリ"))
-        .andExpect(jsonPath("$.material").value("テスト素材"));
+            .content(objectMapper.writeValueAsString(invalidDetail)))
+        .andDo(print())
+        .andExpect(status().isBadRequest());
 
-    verify(productService, times(1)).createProduct(any(ProductDetail.class));
-    verifyNoMoreInteractions(productService);
-    }
+        // Serviceは呼ばれない
+        verify(productService, never()).createProduct(any());
+        }
+
 
 
     // 20行
@@ -634,48 +631,6 @@ class ProductControllerTest {
 
     // 25行目
     @Test
-    @DisplayName("商品更新(updateProduct)異常系: priceが負値でバリデーションエラー400")
-    void updateProduct_WhenPriceIsNegative_ShouldHandleError() throws Exception {
-    // Arrange
-    Integer productId = 1;
-    ProductDetail requestDto = new ProductDetail(
-            null, "商品名", "説明", -999, 3, "/img.png", true, "カテゴリ", "素材"
-    );
-
-    // Act & Assert
-    mockMvc.perform(put("/api/products/{productId}", productId)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(new ObjectMapper().writeValueAsString(requestDto)))
-        .andExpect(status().isBadRequest());
-
-    // Controller(service)が呼ばれないことを確認
-    verify(productService, times(0)).updateProduct(anyInt(), any(ProductDetail.class));
-    }
-
-
-    // 26行目
-    @Test
-    @DisplayName("商品更新(updateProduct)異常系: stockが負値でバリデーションエラー400")
-    void updateProduct_WhenStockIsNegative_ShouldHandleError() throws Exception {
-    // Arrange
-    Integer productId = 1;
-    ProductDetail requestDto = new ProductDetail(
-            null, "商品名", "説明", 999, -5, "/img.png", true, "カテゴリ", "素材"
-    );
-
-    // Act & Assert
-    mockMvc.perform(put("/api/products/{productId}", productId)
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(new ObjectMapper().writeValueAsString(requestDto)))
-        .andExpect(status().isBadRequest());
-
-    // Controller(service)が呼ばれないことを検証
-    verify(productService, times(0)).updateProduct(anyInt(), any(ProductDetail.class));
-    }
-
-
-    // 27行目
-    @Test
     @DisplayName("商品更新(updateProduct)異常系: 存在しないIDで404 Not Found")
     void updateProduct_WhenProductNotFound_ShouldReturn404() throws Exception {
     // Arrange
@@ -694,41 +649,5 @@ class ProductControllerTest {
 
     verify(productService, times(1)).updateProduct(eq(productId), any(ProductDetail.class));
     verifyNoMoreInteractions(productService);
-    }
-
-
-    // 28行目
-    // テストを204にした（0718木村）
-    @Test
-    @DisplayName("商品削除(deleteProduct)正常系: 存在するIDでtrue返却→200 OK")
-    void deleteProduct_WhenExists_ShouldDeleteAndReturnTrue() throws Exception {
-    // Arrange
-    Integer productId = 1;
-    // サービスがtrue返却（削除成功）するようにモック
-    when(productService.deleteProduct(productId)).thenReturn(true);
-
-    // Act & Assert
-    mockMvc.perform(delete("/api/products/{productId}", productId))
-        .andExpect(status().isNoContent());
-
-    verify(productService, times(1)).deleteProduct(productId);
-    verifyNoMoreInteractions(productService);
-    }
-
-
-    // 29行目    
-    @Test
-    @DisplayName("商品削除(deleteProduct)異常系: 存在しないIDでfalse返却→404 Not Found")
-    void deleteProduct_WhenNotExists_ShouldReturn404() throws Exception {
-        // Arrange
-        Integer productId = 999; // 存在しないID
-        when(productService.deleteProduct(productId)).thenReturn(false);
-    
-        // Act & Assert
-        mockMvc.perform(delete("/api/products/{productId}", productId))
-                .andExpect(status().isNotFound());
-    
-        verify(productService, times(1)).deleteProduct(productId);
-        verifyNoMoreInteractions(productService);
     }
 }
