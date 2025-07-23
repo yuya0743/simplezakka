@@ -1,0 +1,17 @@
+HTTP/1.1 201 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 06:27:43 GMT
+Connection: close
+
+{
+  "productId": 49,
+  "name": "テスト商品",
+  "description": "サンプル説明",
+  "price": 1234,
+  "stock": 10,
+  "imageUrl": "http://example.com/image.jpg",
+  "isRecommended": null,
+  "category": null,
+  "material": null
+}
