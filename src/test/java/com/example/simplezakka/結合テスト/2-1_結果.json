@@ -1,0 +1,22 @@
+HTTP/1.1 200 
+Set-Cookie: JSESSIONID=C6BD4970DAF65DA7D8EC6FDDC1D148AE; Path=/; HttpOnly
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 05:55:23 GMT
+Connection: close
+
+{
+  "items": {
+    "1": {
+      "id": "1",
+      "productId": 1,
+      "name": "シンプルデスクオーガナイザー",
+      "price": 3500,
+      "imageUrl": "/images/desk-organizer.png",
+      "quantity": 2,
+      "subtotal": 7000
+    }
+  },
+  "totalQuantity": 2,
+  "totalPrice": 7000
+}
