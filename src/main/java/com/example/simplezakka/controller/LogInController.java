@@ -61,7 +61,7 @@ public class LogInController {
  
 
      // 商品の更新 
-    @PutMapping("/mypageedit") 
+     @PutMapping("/mypageedit/{email:.+}")
     public ResponseEntity<Logininfo> updateProduct( 
         @PathVariable String email, 
         @Valid @RequestBody Logininfo logininfo) { 

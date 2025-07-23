@@ -1,10 +1,13 @@
         document.getElementById('users-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-        const name = form.querySelector('[name="name"]').value;
-        const email = form.querySelector('[name="email"]').value;
-        const address = form.querySelector('[name="address"]').value;
-        const password = form.querySelector('[name="password"]').value;
+         const userdata = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+               password: Number(document.getElementById('password').value),
+                address: Number(document.getElementById('address').value),
+                
+            };
 
 
             fetch('/api/users', {
@@ -12,7 +15,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, address, password }),
+                body: JSON.stringify({ userdata }),
             })
                 .then((response) => {
                     if (!response.ok) {
@@ -22,7 +25,7 @@
         }
         return response.json(); 
     })
-                .then((data) => {
+                .then((userdata) => {
                     alert('登録が成功しました。');
                     window.location.href = 'login.html';                 })
                 .catch((error) => {

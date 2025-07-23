@@ -16,28 +16,25 @@
   
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      fetch("/api/mypage")
-  .then(response => response.json())
-  .then(data2 => {
-    document.getElementById("name").value = data2.name;
-    document.getElementById("mailaddress").value = data2.mailaddress;
-    document.getElementById("address").value = data2.address;
-  });
- 
-        
-        const id = data2.mailaddress;
-       
+ document.addEventListener('DOMContentLoaded', function() {
+       const email = document.getElementById('email').value;
+// メールアドレスをURLエンコードする
+const encodedEmail = encodeURIComponent(email);
+
+
+      
         document.getElementById('editForm').onsubmit = function(e) {
             e.preventDefault();
+            const email = document.getElementById('email').value;
+　　　　　　const encodedEmail = encodeURIComponent(email);
             const data = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 password: document.getElementById('password').value,
-                address: document.getElementById('address').value
-               
+                address: document.getElementById('address').value,
+                
             };
-            fetch(`/api/mypageedit`, {
+            fetch(`/api/users/mypageedit/${encodedEmail}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(data)
@@ -45,7 +42,7 @@
             .then(res => {
                 if (!res.ok) throw new Error();
                 alert("登録情報を更新しました！");
-                window.location.href = "mypage.html";
+                window.location.href = "a-top.html";
             })
             .catch(() => alert("更新に失敗しました"));
         };
