@@ -34,6 +34,7 @@ public class DataLoader implements CommandLineRunner {
                 "机の上をすっきり整理できる木製オーガナイザー。ペン、メモ、スマートフォンなどを収納できます。", 
                 3500, 
                 20, 
+                "デスク周り",
                 "/images/desk-organizer.png", 
                 true
             ),
@@ -42,6 +43,7 @@ public class DataLoader implements CommandLineRunner {
                 "天然木を使用したシンプルなデザインのアロマディフューザー。LEDライト付き。", 
                 4200, 
                 15, 
+                "インテリア・雑貨",
                 "/images/aroma-diffuser.png", 
                 true
             ),
@@ -50,6 +52,7 @@ public class DataLoader implements CommandLineRunner {
                 "オーガニックコットン100%のやわらかブランケット。シンプルなデザインで様々なインテリアに合います。", 
                 5800, 
                 10, 
+                "家具・寝具",
                 "/images/cotton-blanket.png", 
                 false
             ),
@@ -58,6 +61,7 @@ public class DataLoader implements CommandLineRunner {
                 "保温・保冷機能に優れたシンプルなデザインのステンレスタンブラー。容量350ml。", 
                 2800, 
                 30, 
+                "キッチン用品",
                 "/images/tumbler.png", 
                 false
             ),
@@ -66,6 +70,7 @@ public class DataLoader implements CommandLineRunner {
                 "余計な装飾のないシンプルな壁掛け時計。静音設計。", 
                 3200, 
                 25, 
+                "インテリア・雑貨",
                 "/images/wall-clock.png", 
                 false
             ),
@@ -74,6 +79,7 @@ public class DataLoader implements CommandLineRunner {
                 "天然リネン100%のクッションカバー。取り外して洗濯可能。45×45cm対応。", 
                 2500, 
                 40, 
+                "家具・寝具",
                 "/images/cushion-cover.png", 
                 true
             ),
@@ -82,6 +88,7 @@ public class DataLoader implements CommandLineRunner {
                 "手作りの風合いが魅力の陶器製フラワーベース。シンプルな形状で花を引き立てます。", 
                 4000, 
                 15, 
+                "インテリア・雑貨",
                 "/images/flower-vase.png", 
                 false
             ),
@@ -90,6 +97,7 @@ public class DataLoader implements CommandLineRunner {
                 "天然木を使用したシンプルなデザインのコースター。4枚セット。", 
                 1800, 
                 50, 
+                "キッチン用品",
                 "/images/wooden-coaster.png", 
                 false
             ),
@@ -98,6 +106,7 @@ public class DataLoader implements CommandLineRunner {
                 "丈夫なキャンバス地で作られたシンプルなトートバッグ。内ポケット付き。", 
                 3600, 
                 35, 
+                "バッグ・トラベル",
                 "/images/tote-bag.png", 
                 true
             ),
@@ -106,6 +115,7 @@ public class DataLoader implements CommandLineRunner {
                 "電子レンジ・食洗機対応のガラス製保存容器。3サイズセット。", 
                 4500, 
                 20, 
+                "キッチン用品",
                 "/images/glass-container.png", 
                 false
             )
@@ -114,7 +124,7 @@ public class DataLoader implements CommandLineRunner {
         productRepository.saveAll(products);
     }
     
-    private Product createProduct(String name, String description, Integer price, Integer stock, String imageUrl, Boolean isRecommended) {
+    private Product createProduct(String name, String description, Integer price, Integer stock, String category, String imageUrl, Boolean isRecommended) {
         Product product = new Product();
         product.setName(name);
         product.setDescription(description);

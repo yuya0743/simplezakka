@@ -1,0 +1,93 @@
+
+[
+  {
+    "productId": 1,
+    "name": "シンプルデスクオーガナイザー",
+    "price": 3500,
+    "imageUrl": "/images/desk-organizer.png",
+    "category": "デスク周り",
+    "material": "木製",
+    "stock": 20,
+    "description": "机の上をすっきり整理できる木製オーガナイザー。ペン、メモ、スマートフォンなどを収納できます。"
+  },
+  {
+    "productId": 2,
+    "name": "アロマディフューザー（ウッド）",
+    "price": 4200,
+    "imageUrl": "/images/aroma-diffuser.png",
+    "category": "インテリア・雑貨",
+    "material": "木製",
+    "stock": 15,
+    "description": "天然木を使用したシンプルなデザインのアロマディフューザー。LEDライト付き。"
+  },
+  {
+    "productId": 3,
+    "name": "コットンブランケット",
+    "price": 5800,
+    "imageUrl": "/images/cotton-blanket.png",
+    "category": "家具・寝具",
+    "material": "コットン",
+    "stock": 10,
+    "description": "オーガニックコットン100%のやわらかブランケット。シンプルなデザインで様々なインテリアに合います。"
+  },
+  {
+    "productId": 4,
+    "name": "ステンレスタンブラー",
+    "price": 2800,
+    "imageUrl": "/images/tumbler.png",
+    "category": "キッチン用品",
+    "material": "ステンレス",
+    "stock": 30,
+    "description": "保温・保冷機能に優れたシンプルなデザインのステンレスタンブラー。容量350ml。"
+  },
+  {
+    "productId": 5,
+    "name": "ミニマルウォールクロック",
+    "price": 3200,
+    "imageUrl": "/images/wall-clock.png",
+    "category": "インテリア・雑貨",
+    "material": "木製",
+    "stock": 25,
+    "description": "余計な装飾のないシンプルな壁掛け時計。静音設計。"
+  },
+  {
+    "productId": 6,
+    "name": "リネンクッションカバー",
+    "price": 2500,
+    "imageUrl": "/images/cushion-cover.png",
+    "category": "家具・寝具",
+    "material": "リネン",
+    "stock": 40,
+    "description": "天然リネン100%のクッションカバー。取り外して洗濯可能。45×45cm対応。"
+  },
+  {
+    "productId": 7,
+    "name": "陶器フラワーベース",
+    "price": 4000,
+    "imageUrl": "/images/flower-vase.png",
+    "category": "インテリア・雑貨",
+    "material": "陶器",
+    "stock": 15,
+    "description": "手作りの風合いが魅力の陶器製フラワーベース。シンプルな形状で花を引き立てます。"
+  },
+  {
+    "productId": 8,
+    "name": "木製コースター（4枚セット）",
+    "price": 1800,
+    "imageUrl": "/images/wooden-coaster.png",
+    "category": "インテリア・雑貨",
+    "material": "木製",
+    "stock": 50,
+    "description": "天然木を使用したシンプルなデザインのコースター。4枚セット。"
+  },
+  {
+    "productId": 9,
+    "name": "キャンバストートバッグ",
+    "price": 3600,
+    "imageUrl": "/images/tote-bag.png",
+    "category": "バッグ・トラベル",
+    "material": "キャンバス",
+    "stock": 35,
+    "description": "丈夫なキャンバス地で作られたシンプルなトートバッグ。内ポケット付き。"
+  }
+]
