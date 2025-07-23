@@ -9,6 +9,12 @@ public class LoginInfo {
     public LoginInfo() {
         // デフォルトコンストラクタ（必要）
     }
+    public LoginInfo(String name, String email, String password, String address) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+    }
 
     
     // email
