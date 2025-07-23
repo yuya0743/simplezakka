@@ -1,8 +1,8 @@
 POST  http://localhost:8080/api/users
 Content-Type: application/json
 
-{"name": ,
-"email": ,
-"address": ,
-"password": }
+{"name": "test",
+"email": "test@mail.com",
+"address": "Tokyo",
+"password": "0000"}
 
