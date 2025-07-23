@@ -5,5 +5,5 @@ Date: Wed, 23 Jul 2025 06:33:44 GMT
 Connection: close
 
 {
-  "price": "価格は1以上でなければなりません"
+    "price": "価格は1以上でなければなりません"
 }

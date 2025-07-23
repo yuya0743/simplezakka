@@ -5,13 +5,13 @@ Date: Wed, 23 Jul 2025 06:29:33 GMT
 Connection: close
 
 {
-  "productId": 47,
-  "name": "編集後の商品",
-  "description": "編集済み説明",
-  "price": 1800,
-  "stock": 30,
-  "imageUrl": "/edit.png",
-  "isRecommended": null,
-  "category": null,
-  "material": null
+    "productId": 47,
+    "name": "編集後の商品",
+    "description": "編集済み説明",
+    "price": 1800,
+    "stock": 30,
+    "imageUrl": "/edit.png",
+    "isRecommended": null,
+    "category": null,
+    "material": null
 }

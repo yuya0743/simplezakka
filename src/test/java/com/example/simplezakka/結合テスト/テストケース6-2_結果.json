@@ -5,7 +5,7 @@ Date: Wed, 23 Jul 2025 06:27:06 GMT
 Connection: close
 
 [
-  {
+    {
     "productId": 44,
     "name": "商品A",
     "price": 1000,
@@ -14,8 +14,8 @@ Connection: close
     "material": "布",
     "stock": 8,
     "description": "商品です。"
-  },
-  {
+    },
+    {
     "productId": 47,
     "name": "商品B",
     "price": 999,
@@ -24,8 +24,8 @@ Connection: close
     "material": "布",
     "stock": 9,
     "description": "商品です。"
-  },
-  {
+    },
+    {
     "productId": 48,
     "name": "商品C",
     "price": 3000,
@@ -34,5 +34,5 @@ Connection: close
     "material": "布",
     "stock": 8,
     "description": "商品です。"
-  }
+    }
 ]

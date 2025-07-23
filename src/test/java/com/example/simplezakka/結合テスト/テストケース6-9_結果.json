@@ -5,5 +5,5 @@ Date: Wed, 23 Jul 2025 06:34:59 GMT
 Connection: close
 
 {
-  "stock": "在庫数は0以上でなければなりません"
+    "stock": "在庫数は0以上でなければなりません"
 }
