@@ -17,7 +17,7 @@ public class LoginInfo {
     }
 
     
-    // email
+    // emailのやつ
     public String getEmail() {
         return email;
     }
