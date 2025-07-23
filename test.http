@@ -1,2 +1,21 @@
-### 1-4
-GET http://localhost:8080/api/products/abc
+POST http://localhost:8080/api/cart
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 2
+}
+
+### 3-1
+POST http://localhost:8080/api/orders
+Content-Type: application/json
+Cookie: JSESSIONID
+
+{
+  "customerInfo": {
+    "name": "顧客 一郎",
+    "email": "ichiro@test.com",
+    "address": "東京都千代田区テスト1-1",
+    "phoneNumber": "03-1234-5678"
+  }
+}
