@@ -1,23 +1,16 @@
 package com.example.simplezakka.dto.Login;
 
-public class Logininfo {
+public class LoginInfo {
     private String name;      // 氏名を追加
     private String email;
     private String password;
     private String address;   // 住所を追加
 
-    public Logininfo() {
+    public LoginInfo() {
         // デフォルトコンストラクタ（必要）
     }
 
-    // 全項目コンストラクタ（必要なら）
-    public Logininfo(String name, String email, String password, String address) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-    }
-
+    
     // email
     public String getEmail() {
         return email;
