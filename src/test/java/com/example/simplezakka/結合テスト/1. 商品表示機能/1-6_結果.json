@@ -1,0 +1,17 @@
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 06:37:17 GMT
+Connection: close
+
+{
+  "productId": 11,
+  "name": "商品C",
+  "description": "",
+  "price": 3000,
+  "stock": 8,
+  "imageUrl": "",
+  "isRecommended": false,
+  "category": "",
+  "material": "木"
+}
