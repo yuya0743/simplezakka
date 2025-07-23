@@ -1,12 +1,13 @@
-# 機能: 会員登録
+# 機能: ログイン
 
 ## テスト対象API:
 
-- `POST /api/users` (新規会員登録)
+- `POST /api/users/login` (ログイン)
+- `POST /api/users/mypage` (マイページ接続)
+- `POST /api/users/logout` (ログアウト)
 
 ## テストデータ準備方針:
 
-<!-- -各テストケース実行前に、セッションをクリア（または新しいセッションを使用）し、必要に応じてDBに商品データを準備します。-->
 - User情報は `Users(Name, Email, Address, Password)` の形式で記述します。
 
 ## テストシナリオ
@@ -16,12 +17,12 @@
 - 前提条件: 入力フォーム制約通りに入力されたデータ
 - 手順: 
 1. HTTP POSTリクエストを `/api/users` エンドポイントに送信する。リクエストボディに入力データを含める。
-   1. 入力データ(JSON): `{"name":"test" , "email": "test@mail.com","address": "Tokyo", "password":0000}`
+   1. 入力データ(JSON): `{"name":test , "Email": test,"Address": 東京, "Password":0000}`
 
 - 期待結果:
 1. HTTPステータスコードが `201 OK` であること。
 2. レスポンスボディがJSON形式であり、以下のカート情報を含むこと:
-     - `users`: `{"name": "test", "email": "test@mail", "address": "Tokyo", "password": 0000}`
+     - `Users`: `{"name": "test", "Email": "test@mail", "Address": "東京", "Password": 0000}`
 
 ### No. 4-2
 - テストケース名: 新規会員登録（異常系：DB接続エラー）
@@ -30,7 +31,7 @@
 
 - 手順: 
 1. HTTP POSTリクエストを `/api/users` エンドポイントに送信する。リクエストボディに入力データを含める。
-- 入力データ(JSON): `{"name":test , "email": test,"address": 東京, "password":0000}`
+- 入力データ(JSON): `{"name":test , "Email": test,"Address": 東京, "Password":0000}`
 
 - 期待結果:
 1. HTTPステータスコードが `500` であること。
