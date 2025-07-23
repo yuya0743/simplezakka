@@ -30,8 +30,7 @@
 
 - 手順: 
 1. HTTP POSTリクエストを `/api/users` エンドポイントに送信する。リクエストボディに入力データを含める。
-
-入力データ(JSON): `{"name":test , "Email": test,"Address": 東京, "Password":0000}`
+- 入力データ(JSON): `{"name":test , "Email": test,"Address": 東京, "Password":0000}`
 
 - 期待結果:
 1. HTTPステータスコードが `500` であること。
