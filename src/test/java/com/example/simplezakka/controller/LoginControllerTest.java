@@ -69,12 +69,6 @@ class LoginControllerTest {
         successLogininfo = new LoginInfo ("テスト太郎","success@sample.com","password","東京都新宿区1-1-1");
         failLogininfo = new LoginInfo("テスト花子","fail@sample.com","wrongpassword","東京都新宿区2-2-2");
 
-
-        lenient().when(authService.getUserInfoByEmail("success@sample.com")).thenReturn(successLogininfo);
-        lenient().when(authService.getUserInfoByEmail("fail@sample.com")).thenReturn(failLogininfo);
-        lenient().when(authService.login(successLogininfo.getEmail(), successLogininfo.getPassword())).thenReturn(true);
-        lenient().when(authService.login(failLogininfo.getEmail(), failLogininfo.getPassword())).thenReturn(false);
-    // 他のメソッドはテストごとに when で設定
     }
 
  
