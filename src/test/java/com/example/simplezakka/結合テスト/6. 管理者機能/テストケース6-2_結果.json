@@ -1,38 +1,38 @@
 HTTP/1.1 200 
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Wed, 23 Jul 2025 06:27:06 GMT
+Date: Thu, 24 Jul 2025 04:05:42 GMT
 Connection: close
 
 [
-    {
-    "productId": 44,
+  {
+    "productId": 80,
     "name": "商品A",
     "price": 1000,
-    "imageUrl": "https://4.bp.blogspot.com/-O6bxVghqZso/UNMZ81nLdiI/AAAAAAAAIkY/Y9zDSRPAH8U/s1600/capital_a.png",
+    "imageUrl": "https://x.gd/c7Eiq",
     "category": "インテリア・雑貨",
     "material": "布",
-    "stock": 8,
-    "description": "商品です。"
-    },
-    {
-    "productId": 47,
+    "stock": 10,
+    "description": "商品です"
+  },
+  {
+    "productId": 81,
     "name": "商品B",
-    "price": 999,
-    "imageUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1KAcYj00aYGkvC9lgUOOZni1ga2I1xh4RMG97tnY_BgHpsDWkhBwlxGJewKrKlrICSuhyP4kwUxF9LilAGofpQDgoH68uLhbqnPAy7pjybR_3Lyjv-PzAeWaWMxZKK1zt-AEiGi6vW6qC/s1600/capital_b.png",
+    "price": 2000,
+    "imageUrl": "https://x.gd/6LHL6",
     "category": "インテリア・雑貨",
     "material": "布",
     "stock": 9,
-    "description": "商品です。"
-    },
-    {
-    "productId": 48,
+    "description": "商品です"
+  },
+  {
+    "productId": 82,
     "name": "商品C",
     "price": 3000,
-    "imageUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1XqdbaOHZEcXvLfqPUZOPHWIbAS3-SaTEGEBRv30sWhwm-dFs7BHDIXY5ZnWMvMaTo471R7vbnGgPp2e3FQTvSwqmwqvGRps_FHovW0sp_A7f7mPnVZ73U_JdeBghoWCga0Au-uu75zcE/s1600/capital_c.png",
+    "imageUrl": "https://x.gd/HqCSF",
     "category": "インテリア・雑貨",
     "material": "布",
     "stock": 8,
-    "description": "商品です。"
-    }
+    "description": "商品です"
+  }
 ]

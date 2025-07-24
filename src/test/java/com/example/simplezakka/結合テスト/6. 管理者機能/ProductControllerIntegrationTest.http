@@ -21,11 +21,11 @@ Content-Type: application/json
 
 
 ### 6-4　商品編集から商品情報の編集をおこなう
-PUT http://localhost:8080/api/products/47
+PUT http://localhost:8080/api/products/80
 Content-Type: application/json
 
 {
-    "productId": 47,
+    "productId": 80,
     "name": "編集後の商品",
     "price": 1800,
     "description": "編集済み説明",
@@ -35,7 +35,7 @@ Content-Type: application/json
 
 
 ### 6-5　削除ボタンを押すと商品一覧から削除される
-DELETE http://localhost:8080/api/products/44
+DELETE http://localhost:8080/api/products/82
 
 
 ###異常系
