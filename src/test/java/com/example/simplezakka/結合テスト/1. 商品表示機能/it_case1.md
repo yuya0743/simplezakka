@@ -161,4 +161,4 @@ Product(10, "ガラス保存容器セット", 4500, "電子レンジ・食洗機
   1. HTTPステータスコードが `200 OK` であること。
   2. レスポンスボディがJSON形式であること。
   3. 返却されるJSONオブジェクトが `ProductDetail` DTOの形式であること。
-  4. JSONオブジェクトの内容が `{"productId": 3, "name": "商品C", "price": 3000, "description": null, "stock": 8, "imageUrl": null}` であること（`description` と `imageUrl` が `null` であることを確認）。
+  4. JSONオブジェクトの内容が `{"productId": 3, "name": "商品C", "price": 3000, "description": null, "stock": 8, "imageUrl": null}` であること（`description` と `imageUrl` が 空文字 であることを確認）。
