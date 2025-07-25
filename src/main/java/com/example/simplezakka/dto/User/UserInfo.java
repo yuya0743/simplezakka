@@ -1,26 +1,20 @@
 package com.example.simplezakka.dto.User;
 
-import org.hibernate.validator.constraints.Length;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank; 
 
 public class UserInfo {
-    @NotBlank
-    @Valid
+    @NotBlank(message = "名前を入れてください。")
     private String name;
-    @NotBlank
-    @Valid
+
+    @NotBlank(message = "メールアドレスを入れてください。") 
     private String email;
-    @NotBlank
-    @Valid
+
+    @NotBlank(message = "住所を入れてください。")
     private String address;
-    @NotBlank
-    @Valid 
-    @Length(min = 4, max = 20, message = "Password must be between 4 and 20 characters")
+
+    @NotBlank(message = "パスワードを入れてください。")
     private String password;
 
-    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -42,13 +36,11 @@ public class UserInfo {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     public String getPassword() {
         return password;
     }
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 }
