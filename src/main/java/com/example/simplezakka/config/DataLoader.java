@@ -35,6 +35,7 @@ public class DataLoader implements CommandLineRunner {
                 3500, 
                 20, 
                 "デスク周り",
+                "木製",
                 "/images/desk-organizer.png", 
                 true
             ),
@@ -44,6 +45,7 @@ public class DataLoader implements CommandLineRunner {
                 4200, 
                 15, 
                 "インテリア・雑貨",
+                "木製",
                 "/images/aroma-diffuser.png", 
                 true
             ),
@@ -53,6 +55,7 @@ public class DataLoader implements CommandLineRunner {
                 5800, 
                 10, 
                 "家具・寝具",
+                "コットン",
                 "/images/cotton-blanket.png", 
                 false
             ),
@@ -62,6 +65,7 @@ public class DataLoader implements CommandLineRunner {
                 2800, 
                 30, 
                 "キッチン用品",
+                "ステンレス",
                 "/images/tumbler.png", 
                 false
             ),
@@ -71,6 +75,7 @@ public class DataLoader implements CommandLineRunner {
                 3200, 
                 25, 
                 "インテリア・雑貨",
+                "木製",
                 "/images/wall-clock.png", 
                 false
             ),
@@ -80,6 +85,7 @@ public class DataLoader implements CommandLineRunner {
                 2500, 
                 40, 
                 "家具・寝具",
+                "リネン",
                 "/images/cushion-cover.png", 
                 true
             ),
@@ -89,6 +95,7 @@ public class DataLoader implements CommandLineRunner {
                 4000, 
                 15, 
                 "インテリア・雑貨",
+                "陶器",
                 "/images/flower-vase.png", 
                 false
             ),
@@ -98,6 +105,7 @@ public class DataLoader implements CommandLineRunner {
                 1800, 
                 50, 
                 "キッチン用品",
+                "木製",
                 "/images/wooden-coaster.png", 
                 false
             ),
@@ -107,6 +115,7 @@ public class DataLoader implements CommandLineRunner {
                 3600, 
                 35, 
                 "バッグ・トラベル",
+                "キャンバス生地",
                 "/images/tote-bag.png", 
                 true
             ),
@@ -116,6 +125,7 @@ public class DataLoader implements CommandLineRunner {
                 4500, 
                 20, 
                 "キッチン用品",
+                "ガラス",
                 "/images/glass-container.png", 
                 false
             )
@@ -124,12 +134,14 @@ public class DataLoader implements CommandLineRunner {
         productRepository.saveAll(products);
     }
     
-    private Product createProduct(String name, String description, Integer price, Integer stock, String category, String imageUrl, Boolean isRecommended) {
+    private Product createProduct(String name, String description, Integer price, Integer stock, String category, String material, String imageUrl, Boolean isRecommended) {
         Product product = new Product();
         product.setName(name);
         product.setDescription(description);
         product.setPrice(price);
         product.setStock(stock);
+        product.setCategory(category);
+         product.setMaterial(material);
         product.setImageUrl(imageUrl);
         product.setIsRecommended(isRecommended);
         product.setCreatedAt(LocalDateTime.now());
