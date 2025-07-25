@@ -7,3 +7,6 @@ Connection: close
 {
   "message": "Method parameter 'productId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; For input string: \"abc\""
 }
+
+
+メソッド内に入っていないことは単体テストで確認済みなのでここではHTTPの出力のみとする。
