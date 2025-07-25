@@ -1,6 +1,6 @@
 package com.example.simplezakka.controller;
 
-import com.example.simplezakka.dto.Login.Logininfo;
+import com.example.simplezakka.dto.Login.LoginInfo;
 import com.example.simplezakka.service.AuthService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class LogInController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Logininfo> login(@RequestBody Logininfo loginInfo, HttpSession session) {
+    public ResponseEntity<LoginInfo> login(@RequestBody LoginInfo loginInfo, HttpSession session) {
         boolean success = authService.login(loginInfo.getEmail(), loginInfo.getPassword());
         if (success) {
             session.setAttribute("userEmail", loginInfo.getEmail()); 
@@ -29,10 +29,10 @@ public class LogInController {
     }
 
     @GetMapping("/mypage")
-    public ResponseEntity<Logininfo> myPage(HttpSession session) {
+    public ResponseEntity<LoginInfo> myPage(HttpSession session) {
         String email = (String) session.getAttribute("userEmail");
         if (email != null) {
-            Logininfo info = authService.getUserInfoByEmail(email);
+            LoginInfo info = authService.getUserInfoByEmail(email);
             if (info != null) {
                 return ResponseEntity.ok(info);
             } else {

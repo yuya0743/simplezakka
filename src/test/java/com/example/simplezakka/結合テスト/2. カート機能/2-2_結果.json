@@ -1,0 +1,21 @@
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 06:25:11 GMT
+Connection: close
+
+{
+  "items": {
+    "1": {
+      "id": "1",
+      "productId": 1,
+      "name": "シンプルデスクオーガナイザー",
+      "price": 3500,
+      "imageUrl": "/images/desk-organizer.png",
+      "quantity": 4,
+      "subtotal": 14000
+    }
+  },
+  "totalQuantity": 4,
+  "totalPrice": 14000
+}

@@ -1,0 +1,10 @@
+HTTP/1.1 201 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 07:59:14 GMT
+Connection: close
+
+{
+  "orderId": 1,
+  "orderDate": "2025-07-23T16:59:14.527516"
+}

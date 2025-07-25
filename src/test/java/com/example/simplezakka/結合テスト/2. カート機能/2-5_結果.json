@@ -1,0 +1,22 @@
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 07:03:20 GMT
+Connection: close
+
+{
+  "items": {
+    "2": {
+      "id": "2",
+      "productId": 2,
+      "name": "アロマディフューザー（ウッド）",
+      "price": 4200,
+      "imageUrl": "/images/aroma-diffuser.png",
+      "quantity": 1,
+      "subtotal": 4200
+    }
+  },
+  "totalQuantity": 1,
+  "totalPrice": 4200
+}
+
