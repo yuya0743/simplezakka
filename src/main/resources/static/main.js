@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('orderCompleteBody').innerHTML = `
             <p>ご注文ありがとうございます。注文番号は <strong>${order.orderId}</strong> です。</p>
             <p>ご注文日時: ${new Date(order.orderDate).toLocaleString()}</p>
-            <p>お客様のメールアドレスに注文確認メールをお送りしました。</p>
+            
         `;
     }
 });
