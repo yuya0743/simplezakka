@@ -1,0 +1,11 @@
+Set-Cookie: JSESSIONID=D8899B13B49FA2A8FD9254CE3088510A; Path=/; HttpOnly
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 23 Jul 2025 07:08:30 GMT
+Connection: close
+
+{
+  "items": {},
+  "totalQuantity": 0,
+  "totalPrice": 0
+}

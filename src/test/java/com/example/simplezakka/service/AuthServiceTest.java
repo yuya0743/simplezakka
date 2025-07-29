@@ -1,7 +1,7 @@
 package com.example.simplezakka.service;
 
 
-import com.example.simplezakka.dto.Login.Logininfo;
+import com.example.simplezakka.dto.Login.LoginInfo;
 import com.example.simplezakka.entity.User1;
 import com.example.simplezakka.repository.AuthRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,7 +72,7 @@ class AuthServiceTest {
         when(authRepository.findByEmail("user@email.com"))
             .thenReturn(Optional.of(existingUser));
 
-        Logininfo result = authService.getUserInfoByEmail("user@email.com");
+        LoginInfo result = authService.getUserInfoByEmail("user@email.com");
 
         assertThat(result.getEmail()).isEqualTo("user@email.com");
         assertThat(result.getPassword()).isEqualTo("password");
@@ -86,7 +86,7 @@ class AuthServiceTest {
         when(authRepository.findByEmail("unknown@email.com"))
             .thenReturn(Optional.empty());
             
-        Logininfo result = authService.getUserInfoByEmail("unknown@email.com");
+        LoginInfo result = authService.getUserInfoByEmail("unknown@email.com");
 
         assertThat(result).isNull();
     }
@@ -94,7 +94,7 @@ class AuthServiceTest {
     @Test
     @DisplayName("convertToLogin: User1 から Logininfo に正しく変換される")
     void convertToLogin_ShouldReturnLogin() {
-        Logininfo result = authService.convertToLogin(existingUser);
+        LoginInfo result = authService.convertToLogin(existingUser);
 
         assertThat(result.getEmail()).isEqualTo("user@email.com");
         assertThat(result.getPassword()).isEqualTo("password");

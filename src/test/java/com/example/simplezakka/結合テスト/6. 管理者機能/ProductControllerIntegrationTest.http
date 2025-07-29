@@ -1,0 +1,84 @@
+### 正常系
+### 6-1 正しいユーザー名とパスワードを入力する
+#Excelに記載。
+
+
+### 6-2 商品一覧の表示
+GET http://localhost:8080/api/products
+
+
+### 6-3 商品の登録から新たに商品を登録する
+POST http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+  "name": "テスト商品",
+  "price": 1234,
+  "stock": 10,
+  "description": "サンプル説明",
+  "imageUrl": "http://example.com/image.jpg"
+}
+
+
+### 6-4　商品編集から商品情報の編集をおこなう
+PUT http://localhost:8080/api/products/80
+Content-Type: application/json
+
+{
+    "productId": 80,
+    "name": "編集後の商品",
+    "price": 1800,
+    "description": "編集済み説明",
+    "stock": 30,
+    "imageUrl": "/edit.png"
+  }
+
+
+### 6-5　削除ボタンを押すと商品一覧から削除される
+DELETE http://localhost:8080/api/products/82
+
+
+###異常系
+### 6-6 ユーザー名，パスワードの一方，または両方が間違っている
+#Excelに記載。
+
+
+### 6-7 新規商品登録で商品名をnullで指定する
+POST  http://localhost:8080/api/products
+Content-Type: application/json
+
+ {
+    "name": null,
+    "price": 1000,
+    "description": "説明",
+    "stock": 5,
+    "imageUrl": "/img.png"
+  }
+
+
+### 6-8 新規商品登録で価格を0以下で指定する
+POST  http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+    "productId": 3,
+    "name": "商品X",
+    "price": 0,
+    "description": "説明",
+    "stock": 10,
+    "imageUrl": "/img.png"
+  }
+
+
+### 6-9 新規商品登録で在庫を負数で指定する
+POST  http://localhost:8080/api/products
+Content-Type: application/json
+
+{
+    "productId": 4,
+    "name": "商品Y",
+    "price": 1200,
+    "description": "説明",
+    "stock": -5,
+    "imageUrl": "/img.png"
+  }
