@@ -1,2 +1,2 @@
 ### 1-4
-GET http://localhost:8080/api/products/abc
+GET http://3.112.218.166:8080/api/products/abc
